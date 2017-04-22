@@ -2,7 +2,7 @@ gameScene = Scene("gameScene")
 
 --Componentes
 GameHexMap = Component("hexmap", {
-	map = HexMap(9,6)
+	map = HexMap(12,12)
 	})
 
 --Scripts

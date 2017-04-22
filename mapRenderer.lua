@@ -52,10 +52,6 @@ end
 
 
 function MapRenderer:draw(m)
-	
-	local origemX, origemY = 0, 0
-
-	
 
 	local wrapX = m.hexmap.map.w * 120
 	local wrapY = m.hexmap.map.h * 138 * 0.75
@@ -81,15 +77,15 @@ function MapRenderer:draw(m)
 
 	local mmap = m.hexmap.map
 
-	desenhaMapa(mmap, origemX, origemY - wrapY) -- Cima
-	desenhaMapa(mmap, origemX + wrapX, origemY - wrapY) -- Direita e Cima
-	desenhaMapa(mmap, origemX - wrapX, origemY - wrapY) -- Esquerda e cima
-	desenhaMapa(mmap, origemX, origemY) -- Centro
-	desenhaMapa(mmap, origemX + wrapX, origemY) -- Direita
-	desenhaMapa(mmap, origemX - wrapX, origemY) -- Esquerda
-	desenhaMapa(mmap, origemX - wrapX, origemY + wrapY) -- Esquerda e baixo
-	desenhaMapa(mmap, origemX + wrapX, origemY + wrapY) -- Direita e Baixo
-	desenhaMapa(mmap, origemX, origemY + wrapY) -- Baixo
+	desenhaMapa(mmap, 0, -wrapY) -- Cima
+	desenhaMapa(mmap, wrapX, -wrapY) -- Direita e Cima
+	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
+	desenhaMapa(mmap, 0, 0) -- Centro
+	desenhaMapa(mmap, wrapX, 0) -- Direita
+	desenhaMapa(mmap, -wrapX, 0) -- Esquerda
+	desenhaMapa(mmap, -wrapX, wrapY) -- Esquerda e baixo
+	desenhaMapa(mmap, wrapX, wrapY) -- Direita e Baixo
+	desenhaMapa(mmap, 0, wrapY) -- Baixo
  
 	--love.graphics.print("CameraX: "..cameraX.."CameraY: "..cameraY, cameraX, cameraY)
 
