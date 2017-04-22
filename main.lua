@@ -6,50 +6,27 @@ HexMap = require("HexMap")
 height = love.graphics.getHeight()
 width = love.graphics.getWidth()
 
-local dx, dy = 0, 0
-local mousePressX, mousePressY = 0, 0
-local flag = false
+local zoom = 1
 
 function love.load()
-	cCore.loadScene(R.scene.gameScene)
-	camera = Camera(width/2, height/2)
+  cCore.loadScene(R.scene.gameScene)
+  camera = Camera(width/2, height/2)
 end
 
 function love.update(dt)
-	cCore.update(dt)
-
-	if flag then
-		dx = (mousePressX - love.mouse.getX()) / 50
-		dy = (mousePressY - love.mouse.getY()) / 50
-		camera:move(dx, dy)
-	end
-
-
+  cCore.update(dt)
 end
 
 function love.draw()
-	camera:attach()
-	cCore.draw()
+  camera:attach()
+  cCore.draw()
     camera:detach()
 end
 
-function love.mousepressed(x, y, button, istouch)
-   if button == 3 then -- Versions prior to 0.10.0 use the MouseConstant 'l'
-      	mousePressX = x
-      	mousePressY = y
-      	flag = true
-    end
+
+function love.mousemoved( x, y, dx, dy )
+  if love.mouse.isDown(3) then
+    camera:move(math.floor(-dx/2), math.floor(-dy/2))
+  end
 end
 
-function love.mousereleased(x, y, button)
-   if button == 3 then
-      	dx, dy = 0, 0
-      	flag = false
-   end
-end
-
-function love.keypressed(key, scancode, isrepeat)
-    if key == 'escape' then
-        love.event.quit()
-    end
-end
