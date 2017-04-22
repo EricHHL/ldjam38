@@ -13,7 +13,7 @@ return {
       name = "tileset",
       firstgid = 1,
       tilewidth = 122,
-      tileheight = 140,
+      tileheight = 142,
       spacing = 2,
       margin = 0,
       image = "../textures/tileset.png",
