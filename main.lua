@@ -24,7 +24,7 @@ function love.update(dt)
 		camera:move(dx, dy)
 	end
 
-	
+
 end
 
 function love.draw()
@@ -33,13 +33,12 @@ function love.draw()
     camera:detach()
 end
 
-
 function love.mousepressed(x, y, button, istouch)
    if button == 3 then -- Versions prior to 0.10.0 use the MouseConstant 'l'
       	mousePressX = x
       	mousePressY = y
       	flag = true
-   end
+    end
 end
 
 function love.mousereleased(x, y, button)
@@ -47,4 +46,10 @@ function love.mousereleased(x, y, button)
       	dx, dy = 0, 0
       	flag = false
    end
+end
+
+function love.keypressed(key, scancode, isrepeat)
+    if key == 'escape' then
+        love.event.quit()
+    end
 end
