@@ -1,0 +1,29 @@
+NOME
+
+Tiles
+  - Terreno
+    - Grama
+    - Agua
+    - Montanha
+
+  - Melhorias
+    - Cidade
+    - Floresta
+    - Mina
+    - Fazenda?
+
+  - Ligação
+    -Rio
+    -Rua
+
+
+ Combos
+  Benéficos
+    Cidade + floresta
+    Cidade -> rua -> cidade
+
+    Cidade + rio
+    Rio -> Oceano
+
+  Maléficos
+    Floresta + rua
