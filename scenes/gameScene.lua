@@ -48,7 +48,18 @@ end
 
 function gameScene:update(dt)
 	
+end
 
+function love.mousepressed(x, y, button, istouch)
+    if button == 3 then
+      	mousePressX = x
+      	mousePressY = y
+      	flag = true
+    end
+    if button == 1 then
+    	local q,r = PlayerInput.getSelected()
+		map.hexmap.map.map[q][r].melhoria = 1
+    end
 end
 
 return gameScene

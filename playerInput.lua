@@ -4,8 +4,7 @@ local q = 0
 local r = 0
 
 function PlayerInput:updateOnce(dt)
-	local x = love.mouse.getX()
-	local y = love.mouse.getY()
+	local x, y = camera:worldCoords(love.mouse.getPosition())
 	
 	y = y + 35
 
