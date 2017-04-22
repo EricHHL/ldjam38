@@ -52,12 +52,30 @@ end
 
 
 function MapRenderer:draw(m)
+ 
+	local wrapX = m.hexmap.map.w * 121
+	local wrapY = m.hexmap.map.h * 140 * 0.75
 
 	local mmap = m.hexmap.map
+
+	desenhaMapa(mmap, 0, 0) -- Centro
+	desenhaMapa(mmap, wrapX, 0) -- Direita
+	desenhaMapa(mmap, -wrapX, 0) -- Esquerda
+	desenhaMapa(mmap, 0, wrapY) -- Baixo
+	desenhaMapa(mmap, 0, -wrapY) -- Cima
+	desenhaMapa(mmap, wrapX, wrapY) -- Direita e Baixo
+	desenhaMapa(mmap, wrapX, -wrapY) -- Direita e Cima
+	desenhaMapa(mmap, -wrapX, wrapY) -- Esquerda e baixo
+	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
+ 
+
+end
+
+function desenhaMapa( mmap, wrapX, wrapY)
 	for i=1, mmap.w do
 		for j=1, mmap.h do
-			local x = (i-1) * 120	--Multiplica pela largura
-			local y = math.ceil((j-1) * 138.5 * 0.75)	--Multiplica por 75% da altura, porque é hexagono
+			local x = (i-1) * 120 + wrapX	--Multiplica pela largura
+			local y = math.ceil((j-1) * 138.5 * 0.75) + wrapY	--Multiplica por 75% da altura, porque é hexagono
 
 			if j%2 == 0 then
 				x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
@@ -73,12 +91,11 @@ function MapRenderer:draw(m)
 					love.graphics.draw(map.texture, map.tiles[idBordas[v]], x+60, y+70, ((i-1)/6) * math.pi*2, 1.05, 1.05, 60, 70)
 				end
 			end
-			
+				
 			if hex.melhoria ~= 0 then
 				love.graphics.draw(map.texture, map.tiles[idMelhoria[hex.melhoria]], x, y)
 			end
 
 		end
 	end
-
 end
