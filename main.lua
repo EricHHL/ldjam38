@@ -23,10 +23,14 @@ function love.draw()
     camera:detach()
 end
 
-
 function love.mousemoved( x, y, dx, dy )
   if love.mouse.isDown(3) then
-    camera:move(math.floor(-dx/2), math.floor(-dy/2))
+    camera:move(math.floor(-dx), math.floor(-dy))
   end
 end
 
+function love.keypressed(key, scancode, isrepeat)
+    if key == 'escape' then
+        love.event.quit()
+    end
+end
