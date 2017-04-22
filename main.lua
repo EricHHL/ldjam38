@@ -15,18 +15,22 @@ end
 
 function love.update(dt)
   cCore.update(dt)
+
 end
 
 function love.draw()
   camera:attach()
   cCore.draw()
-    camera:detach()
+  camera:detach()
 end
 
 
 function love.mousemoved( x, y, dx, dy )
   if love.mouse.isDown(3) then
-    camera:move(math.floor(-dx/2), math.floor(-dy/2))
+    camera:move(math.floor(-dx), math.floor(-dy))
+    love.mouse.setVisible(false)
+  else
+    love.mouse.setVisible(true)
   end
 end
 
