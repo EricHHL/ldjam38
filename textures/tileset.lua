@@ -12,7 +12,7 @@ return {
     {
       name = "tileset",
       firstgid = 1,
-      tilewidth = 120,
+      tilewidth = 122,
       tileheight = 140,
       spacing = 2,
       margin = 0,

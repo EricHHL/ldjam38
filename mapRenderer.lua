@@ -2,6 +2,12 @@
 MapRenderer = Script({GameHexMap})
 local map
 
+--id dos tiles
+idTile = {
+	14 --grama
+
+}
+
 local function loadTileset(name)
 	map = require("textures."..name)
 	map.tiles = {}
@@ -32,7 +38,19 @@ end
 
 function MapRenderer:draw(m)
 	
-	love.graphics.draw(map.texture, map.tiles[2], 100, 100)
+	local mmap = m.hexmap.map
+	for i=1, mmap.w do
+		for j=1, mmap.h do
+			local x = (i-1) * 120	--Multiplica pela largura
+			local y = (j-1) * 136 * 0.75	--Multiplica por 75% da altura, porque é hexagono
+			
+			if j%2 == 0 then
+				x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
+			end
+			love.graphics.draw(map.texture, map.tiles[idTile[mmap.map[i][j].tipo]], x, y)
+		end
+	end
+
 end
 
 
