@@ -69,11 +69,6 @@ function MapRenderer:draw(m)
 	elseif cameraY < 0 then
 		camera:move(0, wrapY)
 	end
-	
-
- 	--origemX = math.floor(cameraX / wrapX) * wrapX
- 	--origemY = math.floor(cameraY / wrapY) * wrapY
-
 
 	local mmap = m.hexmap.map
 
@@ -86,8 +81,7 @@ function MapRenderer:draw(m)
 	desenhaMapa(mmap, -wrapX, wrapY) -- Esquerda e baixo
 	desenhaMapa(mmap, wrapX, wrapY) -- Direita e Baixo
 	desenhaMapa(mmap, 0, wrapY) -- Baixo
- 
-	--love.graphics.print("CameraX: "..cameraX.."CameraY: "..cameraY, cameraX, cameraY)
+
 
 end
 
