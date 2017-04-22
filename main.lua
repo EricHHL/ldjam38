@@ -6,25 +6,25 @@ HexMap = require("HexMap")
 height = love.graphics.getHeight()
 width = love.graphics.getWidth()
 
-local cameraX, cameraY = width/2, height/2
 local dx, dy = 0, 0
 local mousePressX, mousePressY = 0, 0
 local flag = false
 
 function love.load()
 	cCore.loadScene(R.scene.gameScene)
-	camera = Camera(cameraX, cameraY)
+	camera = Camera(width/2, height/2)
 end
 
 function love.update(dt)
 	cCore.update(dt)
 
 	if flag then
-		dx = (mousePressX - love.mouse.getX()) / 75
-		dy = (mousePressY - love.mouse.getY()) / 75
+		dx = (mousePressX - love.mouse.getX()) / 50
+		dy = (mousePressY - love.mouse.getY()) / 50
+		camera:move(dx, dy)
 	end
 
-	camera:move(dx,dy)
+	
 end
 
 function love.draw()
