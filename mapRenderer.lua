@@ -68,7 +68,6 @@ function MapRenderer:draw(m)
  	origemY = math.floor(cameraY / wrapY) * wrapY
 
 
-
 	local mmap = m.hexmap.map
 
 	desenhaMapa(mmap, origemX, origemY - wrapY) -- Cima
