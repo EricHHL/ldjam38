@@ -68,7 +68,6 @@ function MapRenderer:draw(m)
 	desenhaMapa(mmap, -wrapX, wrapY) -- Esquerda e baixo
 	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
  
-
 end
 
 function desenhaMapa( mmap, wrapX, wrapY)
