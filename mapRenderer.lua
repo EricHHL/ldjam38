@@ -11,6 +11,10 @@ local idMelhoria = {
 	15,	--cidade
 	13	--floresta
 }
+local idBordas = {
+	9
+}
+
 
 local function loadTileset(name, spacing, margin)
     if not spacing then
@@ -43,9 +47,9 @@ local function loadTileset(name, spacing, margin)
 end
 
 function MapRenderer:init(m)
-	print("criou MapRenderer")
 	loadTileset("tileset", 2, 0)
 end
+
 
 function MapRenderer:draw(m)
 
@@ -63,6 +67,13 @@ function MapRenderer:draw(m)
 
 			love.graphics.draw(map.texture, map.tiles[idTile[hex.tipo]], x, y)
 
+
+			for i,v in pairs(hex.bordas) do
+				if (v~=0) then
+					love.graphics.draw(map.texture, map.tiles[idBordas[v]], x+60, y+70, ((i-1)/6) * math.pi*2, 1.05, 1.05, 60, 70)
+				end
+			end
+			
 			if hex.melhoria ~= 0 then
 				love.graphics.draw(map.texture, map.tiles[idMelhoria[hex.melhoria]], x, y)
 			end

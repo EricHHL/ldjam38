@@ -11,6 +11,8 @@ local function new(pos, tipo)
 
 	h.melhoria = 0
 
+	h.bordas = {0,0,0,0,0,0}
+
 	return h
 end
 
