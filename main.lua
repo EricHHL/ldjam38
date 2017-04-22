@@ -1,5 +1,7 @@
 require("lib.coisa.coisaCore")
-require("HexMap")
+
+HexMap = require("hexMap")
+
 
 
 function love.load()
