@@ -12,6 +12,10 @@ require("mapRenderer")
 
 function gameScene:init()
 	map = Coisa("map", {GameHexMap})
+
+	map.hexmap.map.map[2][2].tipo = 2
+	map.hexmap.map.map[3][2].tipo = 2
+	map.hexmap.map.map[3][3].tipo = 2
 end
 
 function gameScene:draw()
