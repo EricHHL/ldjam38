@@ -77,6 +77,9 @@ function Script:reset()
 end
 
 function Script:_init()
+	if self.initOnce then
+		self:initOnce()
+	end
 	if self.init then
 		self:callEach("init")
 	end

@@ -7,6 +7,7 @@ GameHexMap = Component("hexmap", {
 
 --Scripts
 require("mapRenderer")
+require("playerInput")
 
 q = 0
 r = 0
@@ -34,29 +35,19 @@ function gameScene:init()
 end
 
 function gameScene:draw()
+	local q,r = PlayerInput.getSelected()
 	local x = (q-1) * 120	--Multiplica pela largura
 	local y = math.ceil((r-1) * 138.5 * 0.75)	--Multiplica por 75% da altura, porque é hexagono
 
 	if r%2 == 0 then
 		x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
 	end
-	love.graphics.draw(seletor, x-5, y-5)
+	
+	love.graphics.draw(seletor, x-4, y-4)
 end
 
 function gameScene:update(dt)
-	local x = love.mouse.getX()
-	local y = love.mouse.getY()
 	
-	y = y + 35
-
-	x = x / (70 * math.sqrt(3))
-	y = y / (70 * math.sqrt(3))
-
-	temp = math.floor(x + math.sqrt(3) * y + 1)
-	q = math.floor((math.floor(2*x+1) + temp) / 3);
-	r = math.floor((temp + math.floor(-x + math.sqrt(3) * y + 1))/3);
-
-	q = q - math.ceil((r-1)/2)
 
 end
 
