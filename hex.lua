@@ -7,10 +7,29 @@ local function new(pos, tipo)
 	setmetatable(h, Hex)
 
 	h.pos = pos
+
+	--[[ Tipo
+		1 = Grama
+		2 = Agua
+		3 = Montanha
+	]]
 	h.tipo = tipo or 1
 
+	--[[ Melhoria
+		0 = vazio
+		1 = Cidade
+		2 = Floresta
+	]]
 	h.melhoria = 0
 
+	--[[ Borda
+		0 = Vazio
+		1 = Rua
+		2 = Rio
+	]]
+	h.borda = 0	
+
+	--Para uso na renderização
 	h.bordas = {0,0,0,0,0,0}
 
 	return h

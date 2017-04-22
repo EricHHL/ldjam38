@@ -99,11 +99,11 @@ function cCore.update(dt)
 end
 
 function cCore.draw()
+	cCore.callScripts("_draw")
+
 	if cCore.currentScene then
 		cCore.currentScene:_draw()
 	end
-
-	cCore.callScripts("_draw")
 end
 
 function cCore.mousepressed(x,y,b)
