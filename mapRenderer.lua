@@ -60,12 +60,23 @@ function MapRenderer:draw(m)
 	local wrapX = m.hexmap.map.w * 120
 	local wrapY = m.hexmap.map.h * 138 * 0.75
 
+	local cameraX, cameraY = camera:position()
 
+	
+	if cameraX > wrapX then
+		camera:move(-wrapX, 0)
+	elseif cameraX < 0 then
+		camera:move(wrapX, 0)
+	end
+	if cameraY > wrapY then
+		camera:move(0, -wrapY)
+	elseif cameraY < 0 then
+		camera:move(0, wrapY)
+	end
+	
 
-	cameraX, cameraY = camera:position()
-
- 	origemX = math.floor(cameraX / wrapX) * wrapX
- 	origemY = math.floor(cameraY / wrapY) * wrapY
+ 	--origemX = math.floor(cameraX / wrapX) * wrapX
+ 	--origemY = math.floor(cameraY / wrapY) * wrapY
 
 
 	local mmap = m.hexmap.map
@@ -80,6 +91,8 @@ function MapRenderer:draw(m)
 	desenhaMapa(mmap, origemX + wrapX, origemY + wrapY) -- Direita e Baixo
 	desenhaMapa(mmap, origemX, origemY + wrapY) -- Baixo
  
+	--love.graphics.print("CameraX: "..cameraX.."CameraY: "..cameraY, cameraX, cameraY)
+
 end
 
 function desenhaMapa( mmap, wrapX, wrapY)

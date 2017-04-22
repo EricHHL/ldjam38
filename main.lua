@@ -40,13 +40,3 @@ function love.keypressed(key, scancode, isrepeat)
         love.event.quit()
     end
 end
-
-function love.wheelmoved(x, y)
-    if y > 0 then
-        zoom = zoom - 0.1
-        camera:zoom(zoom)
-    elseif y < 0 then
-        zoom = zoom + 0.1
-        camera:zoom(zoom)
-    end
-end
