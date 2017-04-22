@@ -4,7 +4,7 @@ return {
   tiledversion = "0.17.1",
   orientation = "orthogonal",
   renderorder = "left-up",
-  tilewidth = 122,
+  tilewidth = 120,
   tileheight = 140,
   nextobjectid = 1,
   properties = {},
@@ -12,7 +12,7 @@ return {
     {
       name = "tileset",
       firstgid = 1,
-      tilewidth = 122,
+      tilewidth = 120,
       tileheight = 140,
       spacing = 2,
       margin = 0,

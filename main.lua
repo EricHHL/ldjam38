@@ -1,6 +1,6 @@
 require("lib.coisa.coisaCore")
 
-HexMap = require("hexMap")
+HexMap = require("HexMap")
 
 
 
