@@ -9,6 +9,8 @@ local function new(pos, tipo)
 	h.pos = pos
 	h.tipo = tipo or 1
 
+	h.melhoria = 0
+
 	return h
 end
 
