@@ -3,13 +3,21 @@ Hex = require("hex")
 local HexMap = {}
 HexMap.__index = HexMap
 
-local vizinhos = {
-	vector(1,-1),
+local vizinhosI = {
 	vector(1,0),
-	vector(0,1),
-	vector(-1,1),
+	vector(0,-1),
+	vector(-1,-1),
 	vector(-1,0),
-	vector(0,-1)
+	vector(-1,1),
+	vector(0,1)
+}
+local vizinhosP = {
+	vector(1,0),
+	vector(1,-1),
+	vector(0,-1),
+	vector(-1,0),
+	vector(0,1),
+	vector(1,1)
 }
 
 local function new(w,h)
@@ -37,16 +45,44 @@ function HexMap:getHex(q,r)
 		r = q.y
 		q = q.x
 	end
-
-	if (q>0 and q<=self.w and r>0 and r<=self.h+1) then
-		return self.map[q][r-self.map[q]["start"]]
+	if q==0 then
+		q = self.w
 	end
-	return nil
+	if r==0 then
+		r = self.h
+	end
+	if q>self.w then
+		q = 1
+	end
+	if r>self.h then
+		r = 1
+	end
+
+	return self.map[q][r]
 end
 
 function HexMap:getVizinho(hex, v)
 	v2 = ((v+2) % 6)+1
-	return self:getHex(hex.pos+vizinhos[v2])
+	local a
+	if hex.pos.y%2==0 then
+		a = hex.pos+vizinhosP[v2]	
+	else
+		a = hex.pos+vizinhosI[v2]	
+	end
+	return self:getHex(a)
+end
+
+function HexMap:poeCaminho(q,r,c)
+	local hex = self:getHex(q,r)
+	if not hex then return end
+	for i=1,6 do
+		local vizinho = self:getVizinho(hex,i)
+		if vizinho and vizinho.borda == c then
+			hex.bordas[i] = c
+			vizinho.bordas[i+3%6] = c
+		end
+	end
+	hex.borda = c
 
 end
 

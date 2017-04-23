@@ -73,10 +73,10 @@ function MapRenderer:draw(m)
 
 	local mmap = m.hexmap.map
 
+	desenhaMapa(mmap, 0, 0) -- Centro
 	desenhaMapa(mmap, 0, -wrapY) -- Cima
 	desenhaMapa(mmap, wrapX, -wrapY) -- Direita e Cima
 	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
-	desenhaMapa(mmap, 0, 0) -- Centro
 	desenhaMapa(mmap, wrapX, 0) -- Direita
 	desenhaMapa(mmap, -wrapX, 0) -- Esquerda
 	desenhaMapa(mmap, -wrapX, wrapY) -- Esquerda e baixo
@@ -103,7 +103,7 @@ function desenhaMapa( mmap, wrapX, wrapY)
 
 			for i,v in pairs(hex.bordas) do
 				if (v~=0) then
-					love.graphics.draw(map.texture, map.tiles[idBordas[v]], x+60, y+70, ((i-1)/6) * math.pi*2, 1.05, 1.05, 60, 70)
+					love.graphics.draw(map.texture, map.tiles[idBordas[v]], x+60, y+70, -((i-1)/6) * math.pi*2, 1.05, 1.05, 60, 70)
 				end
 			end
 
@@ -111,6 +111,10 @@ function desenhaMapa( mmap, wrapX, wrapY)
 				love.graphics.draw(map.texture, map.tiles[idMelhoria[hex.melhoria]], x, y)
 			end
 
+			--[[love.graphics.print(hex.pos.x..","..hex.pos.y, x+50, y+60)
+			if hex.sel then
+				love.graphics.print(hex.sel, x+50, y+75)
+			end]]
 		end
 	end
 end

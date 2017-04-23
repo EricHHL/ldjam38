@@ -22,15 +22,6 @@ function gameScene:init()
 	map.hexmap.map.map[4][2].melhoria = 1
 	map.hexmap.map.map[4][3].melhoria = 2
 	map.hexmap.map.map[4][1].melhoria = 2
-	map.hexmap.map.map[5][3].bordas[2] = 1
-	map.hexmap.map.map[5][3].bordas[5] = 1
-	map.hexmap.map.map[5][4].bordas[2] = 1
-	map.hexmap.map.map[5][4].bordas[4] = 1
-	map.hexmap.map.map[5][3].bordas[4] = 1
-	map.hexmap.map.map[6][4].bordas[1] = 1
-	map.hexmap.map.map[6][4].bordas[2] = 1
-	map.hexmap.map.map[6][3].bordas[1] = 1
-	map.hexmap.map.map[6][3].bordas[5] = 1
 
 	seletor = R.texture.seletor
 
@@ -69,7 +60,8 @@ function love.mousepressed(x, y, button, istouch)
     end
     if button == 1 then
     	local q,r = PlayerInput.getSelected()
-		map.hexmap.map.map[q][r].melhoria = 1
+    	print(q, r)
+		map.hexmap.map:poeCaminho(q,r,1)
     end
 end
 
