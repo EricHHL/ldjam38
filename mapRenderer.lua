@@ -119,7 +119,7 @@ function desenhaMapa( mmap, wrapX, wrapY)
 
 
 			local pontos = hex.pontos--mmap:getPontos(hex, false)
-			if pontos > 0 then
+			if pontos ~= 0 then
 				love.graphics.print(pontos, x+50, y+100)
 			end
 			--love.graphics.print(hex.rede, x+50, y+115)

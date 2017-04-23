@@ -49,17 +49,17 @@ function HexMap:getHex(q,r)
 		r = q.y
 		q = q.x
 	end
-	if q==0 then
+	if q<=0 then
 		q = q+self.w
 	end
-	if r==0 then
+	if r<=0 then
 		r = r+self.h
 	end
 	if q>self.w then
-		q = 1
+		q = q-self.w
 	end
 	if r>self.h then
-		r = 1
+		r = r-self.h
 	end
 	if self.map[q] then
 		return self.map[q][r]
