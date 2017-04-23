@@ -35,11 +35,14 @@ melhorias = {
 		combos = {}
 	}
 }
-idTiles = {}
 
-for k,v in pairs(melhorias) do
-    table.insert(idTiles, v)
-end
+idTiles = {
+    melhorias.vazio,
+	melhorias.cidade,
+	melhorias.floresta,
+	melhorias.fazenda,
+	melhorias.rua
+}
 
 table.insert(melhorias.cidade.combos,{
 		m = melhorias.floresta,
