@@ -39,9 +39,6 @@ function PlayerInput.getMelhoria()
 end
 
 function PlayerInput.setMelhoria(m)
-    if m == 13 then
-        melhoria = melhorias.floresta
-    elseif m == 15 then
-        melhoria = melhorias.cidade
-    end
+    melhoria = m
+    melhoria = m
 end
