@@ -22,8 +22,19 @@ melhorias = {
 		pontos = -10,
 		borda = 1,
 		combos = {}
-	}
+	},
+    grama = {
+        tile = 14,
+        pontos = 10,
+        combos = {}
+    }
 }
+idTiles = {}
+
+for k,v in pairs(melhorias) do
+    table.insert(idTiles, v)
+end
+
 
 caminhos = {
 }
@@ -37,8 +48,3 @@ table.insert(melhorias.rua.combos,{
 		m = melhorias.cidade,
 		p = 1
 	})
-
-idTiles = {
-	cidade,
-	floresta
-}

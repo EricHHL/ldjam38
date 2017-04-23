@@ -94,16 +94,20 @@ function HexMap:poeCaminho(q,r,c)
 end
 
 function HexMap:poeMelhoria(q,r,m)
-	local hex = self:getHex(q,r)
-	if not hex then return end
 
-	hex.melhoria = m
-	hex.pontos = m.pontos
-	self:poeCaminho(q,r,m.borda)
-	for i=1,6 do
-		local vizinho = self:getVizinho(hex,i)
-		if vizinho.rede ~= 0 then
-			self:atualizaCaminho(vizinho.pos.x,vizinho.pos.y,vizinho.borda)
+    local y = love.mouse.getY()
+    if y < controles.y then
+		local hex = self:getHex(q,r)
+		if not hex then return end
+
+		hex.melhoria = m
+		hex.pontos = m.pontos
+		self:poeCaminho(q,r,m.borda)
+		for i=1,6 do
+			local vizinho = self:getVizinho(hex,i)
+			if vizinho.rede ~= 0 then
+				self:atualizaCaminho(vizinho.pos.x,vizinho.pos.y,vizinho.borda)
+			end
 		end
 	end
 end
@@ -170,7 +174,6 @@ function HexMap:atualizaCaminho(q, r, c)
 	end
 
 	pontosRedes[hex.rede] = math.floor(pontos)
-
 end
 
 setmetatable(HexMap, {__call = function(_, ...) return new(...) end})

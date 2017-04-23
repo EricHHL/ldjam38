@@ -1,36 +1,44 @@
+require("dados")
+
 local gui = {}
 
 function gui:setup()
+    -- Define estilo da Gui
     style = {
-        font = love.graphics.newFont("/fonts/Life is goofy.ttf", 16),
+        font = love.graphics.newFont("/fonts/Life is goofy.ttf", 32),
 		fgColor = "#ffffff",
-		bgColor = "#111111EE",
+		-- bgColor = "#111111EE",
 		mode3d = true,
-		glass = false,
+		glass = true,
 		radius = 3,
 		innerRadius = 3
 	}
 	gooi.setStyle(style)
 	gooi.desktopMode()
-
-    quads = MapRenderer.quads
-    buttons = {}
-    for i=1,2 do
-        local tile = 15
-        if i == 2 then tile = 13 end
-        buttons[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140)
+    -- Pega os quas globais para desenhar nos botões
+    local quads = MapRenderer.quads
+    local tileOptions = {}
+    for i=1,6 do
+        local t = idTiles[love.math.random(1, #idTiles)]
+        tileOptions[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140, 0.9, 0.9)
         :onRelease(function()
-            PlayerInput.setMelhoria(tile)
+            PlayerInput.setMelhoria(t)
         end)
         :setTooltip("Este é um Tile")
-        :setIcon(MapRenderer.texture, quads[tile])--love.math.random(1, #MapRenderer.quads - 10)])
-        :bg({100, 100, 100, 90})
+        :setIcon(MapRenderer.texture, quads[t.tile])--love.math.random(1, #MapRenderer.quads - 10)])
+        :bg({100, 100, 100, 80})
     end
-
+    -- Cria painel controles pra por os controles
     controles = gooi.newPanel(5, love.graphics.getHeight() - 160, love.graphics.getWidth() - 10, 152, "game")
-    for i,v in ipairs(buttons) do
+    for i,v in ipairs(tileOptions) do
         controles:add(v, "b-l")
     end
+
+    -- TEST AREA
+    label = gooi.newLabel("Goofy font parece boa.", 200, 10)
+    -- Da pra facilmente mudar a fonte assim
+    label.style.font = love.graphics.newFont("/fonts/Life is goofy.ttf", 40)
+    -- gooi.confirm("olar")
 end
 
 function gui:update(dt)
@@ -43,10 +51,13 @@ end
 function gui:draw()
     camera:detach()
 
-    gooi.draw()
-    love.graphics.setColor(0, 0, 0, 127)
-    love.graphics.rectangle("line", controles.x, controles.y, controles.w, controles.h)
+    love.graphics.setColor(10, 10, 10, 200)
+    love.graphics.rectangle("fill", controles.x, controles.y, controles.w, controles.h)
     love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.rectangle("line", controles.x, controles.y, controles.w, controles.h)
+    -- love.graphics.setColor(255, 255, 255, 255)
+
+    gooi.draw()
 
     camera:attach()
 end
