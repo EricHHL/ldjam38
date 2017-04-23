@@ -89,6 +89,14 @@ function gui:setup()
             PlayerInput.discardMode = true
         end),
     "3,1")
+    -- Botão para entrar nas opções
+    opcoes:add(gooi.newButton("Options")
+    :onRelease(function()
+        gooi.confirm("There are none, huehuehue.", function()
+
+        end)
+    end),
+    "2,3")
     -- Botão para sair do jogo
     opcoes:add(gooi.newButton("Exit")
     :onRelease(function()
