@@ -3,6 +3,8 @@ PlayerInput = Script()
 local q = 0
 local r = 0
 
+local melhoria = melhorias.cidade
+
 function PlayerInput:updateOnce(dt)
 	local x, y = camera:worldCoords(love.mouse.getPosition())
 	
@@ -20,4 +22,18 @@ end
 
 function PlayerInput.getSelected()
 	return q, r
+end
+
+function love.keypressed(k)
+	if k == "1" then
+		melhoria = melhorias.cidade
+	end
+	if k == "2" then
+		melhoria = melhorias.floresta
+	end
+
+end
+
+function PlayerInput.getMelhoria()
+	return melhoria
 end

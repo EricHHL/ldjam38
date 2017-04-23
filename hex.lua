@@ -32,6 +32,8 @@ local function new(pos, tipo)
 	--Para uso na renderização
 	h.bordas = {0,0,0,0,0,0}
 
+	h.pontos = 0
+
 	return h
 end
 

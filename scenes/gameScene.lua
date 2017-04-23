@@ -6,6 +6,8 @@ GameHexMap = Component("hexmap", {
 	})
 gui = require("/guis/gameSceneGui")
 
+require("dados")
+
 --Scripts
 require("mapRenderer")
 require("playerInput")
@@ -19,9 +21,6 @@ function gameScene:init()
 	map.hexmap.map.map[2][2].tipo = 2
 	map.hexmap.map.map[3][2].tipo = 2
 	map.hexmap.map.map[3][3].tipo = 2
-	map.hexmap.map.map[4][2].melhoria = 1
-	map.hexmap.map.map[4][3].melhoria = 2
-	map.hexmap.map.map[4][1].melhoria = 2
 
 	seletor = R.texture.seletor
 
@@ -61,7 +60,12 @@ function love.mousepressed(x, y, button, istouch)
     if button == 1 then
     	local q,r = PlayerInput.getSelected()
     	print(q, r)
-		map.hexmap.map:poeCaminho(q,r,1)
+    	local m = PlayerInput.getMelhoria()
+		if m == 3 then 
+			map.hexmap.map:poeCaminho(q,r,1)
+		else
+			map.hexmap.map:poeMelhoria(q, r, PlayerInput.getMelhoria())
+		end
     end
 end
 
@@ -70,7 +74,7 @@ end
 -- end
 
 function love.textinput(text)
-    gooi.textimput()
+    gooi.textinput()
 end
 
 return gameScene

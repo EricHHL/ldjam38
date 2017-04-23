@@ -108,7 +108,11 @@ function desenhaMapa( mmap, wrapX, wrapY)
 			end
 
 			if hex.melhoria ~= 0 then
-				love.graphics.draw(map.texture, map.tiles[idMelhoria[hex.melhoria]], x, y)
+				love.graphics.draw(map.texture, map.tiles[hex.melhoria.tile], x, y)
+			end
+
+			if hex.pontos > 0 then
+				love.graphics.print(hex.pontos, x+50, y+100)
 			end
 
 			--[[love.graphics.print(hex.pos.x..","..hex.pos.y, x+50, y+60)
