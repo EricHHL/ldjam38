@@ -23,6 +23,10 @@ function gui:setup()
     local tileOptions = {}
     for i=1,6 do
         local t = idTiles[love.math.random(2, #idTiles)]
+        -- GAMBIARRA ALERT para deixar selecionado o primeiro tile sempre
+        if i == 1 then
+            PlayerInput.setMelhoria(t)
+        end
         tileOptions[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140, 0.9, 0.9)
         :onRelease(function()
             -- Define esse tile como selecionado
@@ -43,7 +47,7 @@ function gui:setup()
         :setIcon(MapRenderer.texture, quads[t.tile])--love.math.random(1, #MapRenderer.quads - 10)])
         :bg({100, 100, 100, 80})
     end
-    -- Guarda o tile selecionado no painel
+    -- Guarda o tile selecionado no painel e seleciona o primeiro
     selectedTile = tileOptions[1]
     -- Opções, cria um painel em grade 3x3 pra elas
     opcoes = gooi.newPanel(love.graphics.getWidth() - 420, love.graphics.getHeight() - 154, 400, 140, "grid 3x3")
