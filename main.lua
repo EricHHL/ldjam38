@@ -1,4 +1,5 @@
 require("lib.coisa.coisaCore")
+-- GOOI
 require("lib.gooi.gooi")
 gooiComponent = require("lib.gooi.component")
 gooiUtf8      = require("lib.gooi.utf8")

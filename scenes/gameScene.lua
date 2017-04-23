@@ -70,7 +70,7 @@ end
 -- end
 
 function love.textinput(text)
-    gooi.textimput()
+    gooi.textinput(text)
 end
 
 return gameScene
