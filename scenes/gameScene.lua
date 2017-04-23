@@ -82,7 +82,7 @@ function love.textinput(text)
 end
 
 function love.wheelmoved(x, y)
-    camera:zoom(1 - y/10)
+    camera:zoom(1 + y/10)
 end
 
 return gameScene
