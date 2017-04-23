@@ -78,22 +78,22 @@ function MapRenderer:draw(m)
 
 	mmap:atualizaPontos()
 
-	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
-	desenhaMapa(mmap, 0, -wrapY) -- Cima
-	desenhaMapa(mmap, wrapX, -wrapY) -- Direita e Cima
+	drawMap(mmap, -wrapX, -wrapY) -- Esquerda e cima
+	drawMap(mmap, 0, -wrapY) -- Cima
+	drawMap(mmap, wrapX, -wrapY) -- Direita e Cima
 
-	desenhaMapa(mmap, -wrapX, 0) -- Esquerda
-	desenhaMapa(mmap, 0, 0) -- Centro
-	desenhaMapa(mmap, wrapX, 0) -- Direita
+	drawMap(mmap, -wrapX, 0) -- Esquerda
+	drawMap(mmap, 0, 0) -- Centro
+	drawMap(mmap, wrapX, 0) -- Direita
 	
-	desenhaMapa(mmap, -wrapX, wrapY) -- Esquerda e baixo
-	desenhaMapa(mmap, 0, wrapY) -- Baixo
-	desenhaMapa(mmap, wrapX, wrapY) -- Direita e Baixo
+	drawMap(mmap, -wrapX, wrapY) -- Esquerda e baixo
+	drawMap(mmap, 0, wrapY) -- Baixo
+	drawMap(mmap, wrapX, wrapY) -- Direita e Baixo
 
 
 end
 
-function desenhaMapa( mmap, wrapX, wrapY)
+function drawMap( mmap, wrapX, wrapY)
 	love.graphics.setColor(Color.white:value())
 	for i=1, mmap.w do
 		for j=1, mmap.h do
