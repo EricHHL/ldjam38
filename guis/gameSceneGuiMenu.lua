@@ -30,22 +30,25 @@ function gui:update(dt)
     --Inicia o jogo
     opcoesMenu:add(gooi.newButton("Play")
         :onRelease(function(self)
-            --Função para começar o jogo
+            gooi.removeComponent(opcoesMenu)
+            cCore.loadScene(R.scene.gameScene)
         end),
     "1,1")
     --Entra nas opções
     opcoesMenu:add(gooi.newButton("Options")
-        :onRelease(function(self)
-            --Função para ir para o menu
-        end),
+    :onRelease(function()
+        gooi.confirm("There are none, huehuehue.", function()
+            --Alguma opção
+        end)
+    end),
     "2,1")
     --Sai do jogo
     opcoesMenu:add(gooi.newButton("Exit")
     :onRelease(function()
-            gooi.confirm("Are you sure?", function()
-                love.event.quit()
-            end)
-        end),
+        gooi.confirm("Are you sure?", function()
+            love.event.quit()
+        end)
+    end),
     "3,1")
 end
 
