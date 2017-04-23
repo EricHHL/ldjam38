@@ -49,11 +49,11 @@ function HexMap:getHex(q,r)
 		r = q.y
 		q = q.x
 	end
-	if q==0 then
-		q = self.w
+	if q<=0 then
+		q = q+self.w
 	end
-	if r==0 then
-		r = self.h
+	if r<=0 then
+		r = q+self.h
 	end
 	if q>self.w then
 		q = 1
@@ -127,7 +127,7 @@ function HexMap:getPontos(hex, excRede)
 		end
 	end
 
-	if not excRede  and hex.rede~=0 then
+	if not excRede  and hex.rede~=0 and hex.melhoria == melhorias.cidade then
 		total = total + pontosRedes[hex.rede]
 	end
 

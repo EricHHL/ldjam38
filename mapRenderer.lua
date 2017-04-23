@@ -46,9 +46,11 @@ local function loadTileset(name, spacing, margin)
     MapRenderer.quads = map.tiles
     MapRenderer.texture = map.texture
 end
-
+local font
 function MapRenderer:init(m)
 	loadTileset("tileset", 2, 0)
+	font = love.graphics.newFont("/fonts/Life is goofy.ttf", 32)
+	love.graphics.setFont(font)
 end
 
 
@@ -87,6 +89,7 @@ function MapRenderer:draw(m)
 end
 
 function desenhaMapa( mmap, wrapX, wrapY)
+
 	for i=1, mmap.w do
 		for j=1, mmap.h do
 			local x = (i-1) * 120 + wrapX	--Multiplica pela largura
