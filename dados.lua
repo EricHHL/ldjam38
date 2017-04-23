@@ -22,12 +22,7 @@ melhorias = {
 		pontos = -10,
 		borda = 1,
 		combos = {}
-	},
-    grama = {
-        tile = 14,
-        pontos = 10,
-        combos = {}
-    }
+	}
 }
 idTiles = {}
 
@@ -48,3 +43,5 @@ table.insert(melhorias.rua.combos,{
 		m = melhorias.cidade,
 		p = 1
 	})
+
+playerPoints = 0
