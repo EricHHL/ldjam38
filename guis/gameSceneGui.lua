@@ -4,7 +4,7 @@ local gui = {}
 
 function gui:setup()
     -- Define estilo da Gui
-    selected = {15, 256, 12}
+    selectedColor = {15, 256, 12}
     style = {
         font = love.graphics.newFont("/fonts/Life is goofy.ttf", 32),
 		fgColor = "#ffffff",
@@ -25,6 +25,8 @@ function gui:setup()
         local t = idTiles[love.math.random(2, #idTiles)]
         tileOptions[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140, 0.9, 0.9)
         :onRelease(function()
+            -- Define esse tile como selecionado
+            selectedTile = tileOptions[i]
             if PlayerInput.discardMode then
                 -- Se estiver no modo de descartar muda o quad a se desenhar
                 t = idTiles[love.math.random(1, #idTiles)] -- pega um tile aleatório
@@ -41,15 +43,17 @@ function gui:setup()
         :setIcon(MapRenderer.texture, quads[t.tile])--love.math.random(1, #MapRenderer.quads - 10)])
         :bg({100, 100, 100, 80})
     end
+    -- Guarda o tile selecionado no painel
+    selectedTile = tileOptions[1]
     -- Opções, cria um painel em grade 3x3 pra elas
     opcoes = gooi.newPanel(love.graphics.getWidth() - 420, love.graphics.getHeight() - 154, 400, 140, "grid 3x3")
     -- Botão para selecionar um tile para colocar
     opcoes:add(gooi.newButton("Select")
         :onRelease(function(self)
-            -- Deixa esse da cor 'selected' e todos os outros da cor style.bgColor
+            -- Deixa esse da cor 'selectedColor' e todos os outros da cor style.bgColor
             for k,v in pairs(opcoes.sons) do
                 if v.ref == self then
-                    v.ref:bg(selected)
+                    v.ref:bg(selectedColor)
                 else
                     v.ref:bg(style.bgColor)
                 end
@@ -57,15 +61,15 @@ function gui:setup()
             print("Select mode")
             PlayerInput.discardMode = false
         end)
-        :bg(selected),
+        :bg(selectedColor),
     "1,1")
     -- Botão para descartar um tile a lista
     opcoes:add(gooi.newButton("Discard")
         :onRelease(function(self)
-            -- Deixa esse da cor 'selected' e todos os outros da cor style.bgColor
+            -- Deixa esse da cor 'selectedColor' e todos os outros da cor style.bgColor
             for k,v in pairs(opcoes.sons) do
                 if v.ref == self then
-                    v.ref:bg(selected)
+                    v.ref:bg(selectedColor)
                 else
                     v.ref:bg(style.bgColor)
                 end
@@ -77,10 +81,10 @@ function gui:setup()
     -- Botão para destruir um tile do jogo
     opcoes:add(gooi.newButton("Destroy")
         :onRelease(function(self)
-            -- Deixa esse da cor 'selected' e todos os outros da cor style.bgColor
+            -- Deixa esse da cor 'selectedColor' e todos os outros da cor style.bgColor
             for k,v in pairs(opcoes.sons) do
                 if v.ref == self then
-                    v.ref:bg(selected)
+                    v.ref:bg(selectedColor)
                 else
                     v.ref:bg(style.bgColor)
                 end
@@ -139,8 +143,10 @@ function gui:draw()
     -- Desenha fundo da gui
     love.graphics.setColor(10, 10, 10, 200)
     love.graphics.rectangle("fill", controles.x, controles.y, controles.w, controles.h)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(100, 100, 100, 255)
     love.graphics.rectangle("line", controles.x, controles.y, controles.w, controles.h)
+    love.graphics.setColor(255, 255, 255, 2500)
+    love.graphics.rectangle("line", selectedTile.x, selectedTile.y, selectedTile.w, selectedTile.h)
     -- love.graphics.setColor(255, 255, 255, 255)
 
     gooi.draw()

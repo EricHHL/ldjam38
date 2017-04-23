@@ -128,4 +128,3 @@ function desenhaMapa( mmap, wrapX, wrapY)
 		end
 	end
 end
-
