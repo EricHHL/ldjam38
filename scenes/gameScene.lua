@@ -11,7 +11,6 @@ gui = require("/guis/gameSceneGui")
 --Scripts
 require("mapRenderer")
 require("playerInput")
-require("animaTexto")
 
 local q = 0
 local r = 0

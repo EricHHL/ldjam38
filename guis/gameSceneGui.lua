@@ -149,7 +149,7 @@ function gui:draw()
     love.graphics.rectangle("fill", controles.x, controles.y, controles.w, controles.h)
     love.graphics.setColor(100, 100, 100, 255)
     love.graphics.rectangle("line", controles.x, controles.y, controles.w, controles.h)
-    love.graphics.setColor(255, 255, 255, 2500)
+    love.graphics.setColor(255, 255, 255, 255)
     love.graphics.rectangle("line", selectedTile.x, selectedTile.y, selectedTile.w, selectedTile.h)
     -- love.graphics.setColor(255, 255, 255, 255)
 
