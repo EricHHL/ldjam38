@@ -12,8 +12,8 @@ require("dados")
 require("mapRenderer")
 require("playerInput")
 
-q = 0
-r = 0
+local q = 0
+local r = 0
 
 function gameScene:init()
 	map = Coisa("map", {GameHexMap})
@@ -32,15 +32,19 @@ function gameScene:init()
 end
 
 function gameScene:draw()
-	local q,r = PlayerInput.getSelected()
-	local x = (q-1) * 120	--Multiplica pela largura
-	local y = math.ceil((r-1) * 138.5 * 0.75)	--Multiplica por 75% da altura, porque é hexagono
+    -- Se não estiver dentro do painel de controles
+    local mousey = love.mouse.getY()
+    if mousey < controles.y then
+    	local q,r = PlayerInput.getSelected()
+    	local x = (q-1) * 120	--Multiplica pela largura
+    	local y = math.ceil((r-1) * 138.5 * 0.75)	--Multiplica por 75% da altura, porque é hexagono
 
-	if r%2 == 0 then
-		x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
-	end
+    	if r%2 == 0 then
+    		x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
+    	end
 
-	love.graphics.draw(seletor, x-4, y-4)
+	    love.graphics.draw(seletor, x-4, y-4)
+    end
 
     gui:draw()
 end
@@ -50,7 +54,7 @@ function gameScene:update(dt)
 end
 
 function love.mousereleased(x, y, button, isTouch)
-    print(gooi.released())
+    gooi.released()
 end
 
 function love.mousepressed(x, y, button, istouch)

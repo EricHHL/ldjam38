@@ -22,19 +22,44 @@ function gui:setup()
         local t = idTiles[love.math.random(1, #idTiles)]
         tileOptions[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140, 0.9, 0.9)
         :onRelease(function()
-            PlayerInput.setMelhoria(t)
+            if PlayerInput.discardMode then
+                -- Se estiver no modo de descartar muda o quad a se desenhar
+                t = idTiles[love.math.random(1, #idTiles)]
+                tileOptions[i]:setIcon(MapRenderer.texture, quads[t.tile])
+                PlayerInput.setMelhoria(t)
+                PlayerInput.discardMode = false
+            else
+                PlayerInput.setMelhoria(t)
+            end
         end)
         :setTooltip("Este é um Tile")
         :setIcon(MapRenderer.texture, quads[t.tile])--love.math.random(1, #MapRenderer.quads - 10)])
         :bg({100, 100, 100, 80})
     end
-    -- Cria painel controles pra por os controles
+    -- Opções
+    opcoes = gooi.newPanel(love.graphics.getWidth() - 420, love.graphics.getHeight() - 154, 400, 140, "grid 3x3")
+    opcoes:add(gooi.newButton("Discard")
+        :onRelease(function()
+            print("Discard mode")
+            PlayerInput.discardMode = true
+        end),
+    "1,1")
+    opcoes:add(gooi.newButton("Exit")
+        :onRelease(function()
+        	gooi.confirm("Are you sure?", function()
+                love.event.quit()
+        	end)
+        end),
+    "3,3")
+            -- Cria painel controles pra por os controles
     controles = gooi.newPanel(5, love.graphics.getHeight() - 160, love.graphics.getWidth() - 10, 152, "game")
     for i,v in ipairs(tileOptions) do
         controles:add(v, "b-l")
     end
+    -- controles:add(opcoes, "b-l")
 
     -- TEST AREA
+    opcoes.layout.debug = true
     label = gooi.newLabel("Goofy font parece boa.", 200, 10)
     -- Da pra facilmente mudar a fonte assim
     label.style.font = love.graphics.newFont("/fonts/Life is goofy.ttf", 40)

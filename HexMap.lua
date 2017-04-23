@@ -88,6 +88,7 @@ end
 
 function HexMap:poeMelhoria(q,r,m)
     local y = love.mouse.getY()
+    -- Se não estiver dentro dos controles, pra não clicar atráves deles
     if y < controles.y then
     	local hex = self:getHex(q,r)
     	if not hex then return end
