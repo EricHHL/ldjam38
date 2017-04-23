@@ -32,6 +32,8 @@ function gui:setup()
             -- Define esse tile como selecionado
             selectedTile = tileOptions[i]
             if PlayerInput.discardMode then
+                -- Animação de card desaparecendo
+                Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile}) })
                 -- Se estiver no modo de descartar muda o quad a se desenhar
                 t = idTiles[love.math.random(1, #idTiles)] -- pega um tile aleatório
                 -- Muda o ícone do botão pro novo quad
@@ -41,7 +43,6 @@ function gui:setup()
             else
                 PlayerInput.setMelhoria(t)
             end
-            Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile}) })
 
             -- Coisa("asd", {Position({x=x,y=y}), AnimTexto({texto = ""..(total-hex.pontos)})})
 

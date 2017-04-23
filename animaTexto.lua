@@ -4,7 +4,7 @@ TextoAnimator = Script({AnimTexto, Position})
 
 function TextoAnimator:init(t)
 	local a = t
-	Timer.tween(2, t.pos, {y = t.pos.y - 100}, "out-quad", function() self.cList[t.id] = nil end)
+	Timer.tween(2, t.pos, {y = t.pos.y - 50}, "out-quad", function() self.cList[t.id] = nil end)
 	Timer.tween(2, t.animTexto, {alpha = 0})
 end
 
