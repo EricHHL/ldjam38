@@ -4,8 +4,8 @@ local map
 
 --id dos tiles
 local idTile = {
-	14, --grama
-	27	--agua
+	3, --grama
+	18	--agua
 }
 local idMelhoria = {
 	15,	--cidade
@@ -48,9 +48,10 @@ local function loadTileset(name, spacing, margin)
 end
 local font
 function MapRenderer:init(m)
-	loadTileset("tileset", 2, 0)
+	loadTileset("tileset", 0, 0)
 	font = love.graphics.newFont("/fonts/Life is goofy.ttf", 32)
 	love.graphics.setFont(font)
+	love.graphics.setBackgroundColor(Color.green:value())
 end
 
 
@@ -93,6 +94,7 @@ function MapRenderer:draw(m)
 end
 
 function desenhaMapa( mmap, wrapX, wrapY)
+	love.graphics.setColor(Color.white:value())
 	for i=1, mmap.w do
 		for j=1, mmap.h do
 			local x = (i-1) * 120 + wrapX	--Multiplica pela largura
@@ -102,9 +104,11 @@ function desenhaMapa( mmap, wrapX, wrapY)
 				x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
 			end
 
+			x = x - 10
+
 			local hex = mmap.map[i][j]
 
-			love.graphics.draw(map.texture, map.tiles[idTile[hex.tipo]], x, y)
+			love.graphics.draw(map.texture, map.tiles[idTile[hex.tipo]], x, y, 0, 0.55, 0.54)
 
 
 			for i,v in pairs(hex.bordas) do
@@ -114,14 +118,13 @@ function desenhaMapa( mmap, wrapX, wrapY)
 			end
 
 			if hex.melhoria ~= melhorias.vazio then
-				love.graphics.draw(map.texture, map.tiles[hex.melhoria.tile], x, y)
+				love.graphics.draw(map.texture, map.tiles[hex.melhoria.tile], x, y, 0, 0.546875, 0.546875)
 			end
 
 
 			local pontos = hex.pontos--mmap:getPontos(hex, false)
 			if pontos ~= 0 then
 				if pontos>0 then
-					love.graphics.setColor(Color.blue:value())
 					love.graphics.print(pontos, x+50, y+100)
 				else
 					love.graphics.setColor(Color.red:value())
