@@ -5,18 +5,14 @@ guiMenu = require("/guis/gameSceneGuiMenu")
 function menuScene:init()
     -- GUI
     guiMenu.setup()
-    --guiMenu.setup()
 end
 
 function menuScene:draw()
-    
     guiMenu:draw()
-    --guiMenu:draw()
 end
 
 function menuScene:update(dt)
     guiMenu:update(dt)
-    --guiMenu:update(dt)
 end
 
 function love.mousereleased(x, y, button, isTouch)

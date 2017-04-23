@@ -17,22 +17,13 @@ function gui:setup()
     gooi.setStyle(style)
     gooi.desktopMode()
 
-    
-end
-
-function gui:update(dt)
-    gooi.update(dt)
-    if love.keyboard.isDown('escape') then
-        love.event.quit()
-    end
-
     opcoesMenu = gooi.newPanel(width/2 - 150, height/2 - 200, 300, 300, "grid 3x1")
     --Inicia o jogo
     opcoesMenu:add(gooi.newButton("Play")
-        :onRelease(function(self)
-            gooi.removeComponent(opcoesMenu)
-            cCore.loadScene(R.scene.gameScene)
-        end),
+    :onRelease(function(self)
+        gooi.removeComponent(opcoesMenu)
+        cCore.loadScene(R.scene.gameScene)
+    end),
     "1,1")
     --Entra nas opções
     opcoesMenu:add(gooi.newButton("Options")
@@ -50,6 +41,15 @@ function gui:update(dt)
         end)
     end),
     "3,1")
+
+end
+
+function gui:update(dt)
+    gooi.update(dt)
+    if love.keyboard.isDown('escape') then
+        love.event.quit()
+    end
+
 end
 
 function gui:draw()
@@ -58,7 +58,7 @@ function gui:draw()
     -- Desenha fundo da gui
     love.graphics.setColor(200, 200, 200, 170)
     love.graphics.rectangle("fill",  width/2 - 150, height/2 - 200, 300, 300)
-    
+
     love.graphics.setColor(80, 80, 80, 255)
     love.graphics.rectangle("line",  width/2 - 150, height/2 - 200, 300, 300)
     gooi.draw()
