@@ -31,7 +31,7 @@ function gui:setup()
         :onRelease(function()
             -- Define esse tile como selecionado
             selectedTile = tileOptions[i]
-            if PlayerInput.discardMode then
+            if PlayerInput.mode == "discard" then
                 -- Se estiver no modo de descartar muda o quad a se desenhar
                 t = idTiles[love.math.random(2, #idTiles)] -- pega um tile aleatório
                 -- Muda o ícone do botão pro novo quad
@@ -40,7 +40,7 @@ function gui:setup()
                 PlayerInput.setMelhoria(t)
                 -- Animação de card desaparecendo
                 Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile}) })
-            else
+            elseif PlayerInput.mode == "select" then
                 PlayerInput.setMelhoria(t)
             end
         end)
@@ -64,7 +64,7 @@ function gui:setup()
                 end
             end
             print("Select mode")
-            PlayerInput.discardMode = false
+            PlayerInput.mode = "select"
         end)
         :bg(selectedColor),
     "1,1")
@@ -80,7 +80,7 @@ function gui:setup()
                 end
             end
             print("Discard mode")
-            PlayerInput.discardMode = true
+            PlayerInput.mode = "discard"
         end),
     "2,1")
     -- Botão para destruir um tile do jogo
@@ -95,7 +95,7 @@ function gui:setup()
                 end
             end
             print("Destroy mode")
-            PlayerInput.discardMode = true
+            PlayerInput.mode = "destroy"
             PlayerInput.setMelhoria(idTiles[1])
             selectedTile = nil
         end),

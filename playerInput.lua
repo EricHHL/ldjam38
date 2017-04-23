@@ -2,7 +2,7 @@ PlayerInput = Script()
 
 local q = 0
 local r = 0
-PlayerInput.discardMode = false
+PlayerInput.mode = "select"
 
 local melhoria = melhorias.cidade
 
