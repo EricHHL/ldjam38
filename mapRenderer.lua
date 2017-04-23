@@ -75,6 +75,8 @@ function MapRenderer:draw(m)
 
 	local mmap = m.hexmap.map
 
+	mmap:atualizaPontos()
+
 	desenhaMapa(mmap, 0, -wrapY) -- Cima
 	desenhaMapa(mmap, wrapX, -wrapY) -- Direita e Cima
 	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
@@ -89,7 +91,6 @@ function MapRenderer:draw(m)
 end
 
 function desenhaMapa( mmap, wrapX, wrapY)
-
 	for i=1, mmap.w do
 		for j=1, mmap.h do
 			local x = (i-1) * 120 + wrapX	--Multiplica pela largura
@@ -114,11 +115,11 @@ function desenhaMapa( mmap, wrapX, wrapY)
 				love.graphics.draw(map.texture, map.tiles[hex.melhoria.tile], x, y)
 			end
 
-			local pontos = mmap:getPontos(hex, false)
+
+			local pontos = hex.pontos--mmap:getPontos(hex, false)
 			if pontos > 0 then
 				love.graphics.print(pontos, x+50, y+100)
 			end
-
 			--love.graphics.print(hex.rede, x+50, y+115)
 			--[[love.graphics.print(hex.pos.x..","..hex.pos.y, x+50, y+60)
 			if hex.sel then
@@ -127,3 +128,4 @@ function desenhaMapa( mmap, wrapX, wrapY)
 		end
 	end
 end
+

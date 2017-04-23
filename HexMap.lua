@@ -130,8 +130,19 @@ function HexMap:getPontos(hex, excRede)
 	if not excRede  and hex.rede~=0 and hex.melhoria == melhorias.cidade then
 		total = total + pontosRedes[hex.rede]
 	end
-
+	hex.pontos = total
 	return total
+end
+
+function HexMap:atualizaPontos()
+	local totalPontos = 0
+	for i=1, self.w do
+		for j=1, self.h do
+			totalPontos = totalPontos + self:getPontos(self.map[i][j])
+		end
+	end
+	playerPoints = totalPontos
+	print(playerPoints)
 end
 
 function HexMap:atualizaCaminho(q, r, c)
