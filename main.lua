@@ -6,6 +6,7 @@ gooiUtf8      = require("lib.gooi.utf8")
 gooiLayout    = require("lib.gooi.layout")
 
 Camera = require("hump-master/camera")
+Timer = require("lib.timer")
 HexMap = require("HexMap")
 
 height = love.graphics.getHeight()
@@ -20,6 +21,7 @@ end
 
 function love.update(dt)
     cCore.update(dt)
+    Timer.update(dt)
 end
 
 function love.draw()

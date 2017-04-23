@@ -131,7 +131,18 @@ function HexMap:getPontos(hex, excRede)
 	if not excRede  and hex.rede~=0 and hex.melhoria == melhorias.cidade then
 		total = total + pontosRedes[hex.rede]
 	end
-	hex.pontos = total
+	if hex.pontos ~= total and not excRede then
+		local x = (hex.pos.x-1) * 120	--Multiplica pela largura
+		local y = math.ceil((hex.pos.y-1) * 138.5 * 0.75)	--Multiplica por 75% da altura, porque é hexagono
+
+		if hex.pos.y%2 == 0 then
+			x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
+		end
+		Coisa("asd", {Position({x=x,y=y}), AnimTexto({texto = ""..(total-hex.pontos)})})
+	end
+	if not excRede then
+		hex.pontos = total
+	end
 	return total
 end
 
@@ -143,7 +154,6 @@ function HexMap:atualizaPontos()
 		end
 	end
 	playerPoints = totalPontos
-	print(playerPoints)
 end
 
 function HexMap:atualizaCaminho(q, r, c)
