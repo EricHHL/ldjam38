@@ -1,17 +1,17 @@
 local gui = {}
 
 function gui:setup()
-    imgs = MapRenderer.quads
+    quads = MapRenderer.quads
     buttons = {}
-    for i=1,6 do
+    for i=1,2 do
+        local tile = 15
+        if i == 2 then tile = 13 end
         buttons[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140)
         :setTooltip("This is a tooltip!")
         :onRelease(function()
-            -- gooi.confirm("Are you sure?", function()
-            --
-            -- end)
+            PlayerInput.setMelhoria(tile)
         end)
-        :setIcon(MapRenderer.texture, imgs[i])--love.math.random(1, #MapRenderer.quads - 10)])
+        :setIcon(MapRenderer.texture, quads[tile])--love.math.random(1, #MapRenderer.quads - 10)])
         :bg({100, 100, 100, 90})
     end
 
@@ -23,6 +23,9 @@ end
 
 function gui:update(dt)
     gooi.update(dt)
+    if love.keyboard.isDown('escape') then
+        love.event.quit()
+    end
 end
 
 function gui:draw()

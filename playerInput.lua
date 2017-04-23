@@ -7,7 +7,7 @@ local melhoria = melhorias.cidade
 
 function PlayerInput:updateOnce(dt)
 	local x, y = camera:worldCoords(love.mouse.getPosition())
-	
+
 	y = y + 35
 
 	x = x / (70 * math.sqrt(3))
@@ -36,4 +36,12 @@ end
 
 function PlayerInput.getMelhoria()
 	return melhoria
+end
+
+function PlayerInput.setMelhoria(m)
+    if m == 13 then
+        melhoria = melhorias.floresta
+    elseif m == 15 then
+        melhoria = melhorias.cidade
+    end
 end

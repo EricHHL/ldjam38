@@ -15,4 +15,3 @@ table.insert(melhorias.floresta.combos,{
 		m = melhorias.cidade,
 		p = 1
 })
-

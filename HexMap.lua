@@ -66,9 +66,9 @@ function HexMap:getVizinho(hex, v)
 	v2 = ((v+2) % 6)+1
 	local a
 	if hex.pos.y%2==0 then
-		a = hex.pos+vizinhosP[v2]	
+		a = hex.pos+vizinhosP[v2]
 	else
-		a = hex.pos+vizinhosI[v2]	
+		a = hex.pos+vizinhosI[v2]
 	end
 	return self:getHex(a)
 end
