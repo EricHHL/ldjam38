@@ -1,4 +1,8 @@
 require("lib.coisa.coisaCore")
+require("lib.gooi.gooi")
+gooiComponent = require("lib.gooi.component")
+gooiUtf8      = require("lib.gooi.utf8")
+gooiLayout    = require("lib.gooi.layout")
 
 Camera = require("hump-master/camera")
 HexMap = require("HexMap")
@@ -15,13 +19,13 @@ end
 
 function love.update(dt)
     cCore.update(dt)
-
 end
 
 function love.draw()
     camera:attach()
     cCore.draw()
     camera:detach()
+    -- gooi.draw()
 end
 
 
@@ -36,6 +40,7 @@ end
 
 
 function love.keypressed(key, scancode, isrepeat)
+    gooi.keypressed()
     if key == 'escape' then
         love.event.quit()
     end

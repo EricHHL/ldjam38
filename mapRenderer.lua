@@ -43,7 +43,8 @@ local function loadTileset(name, spacing, margin)
 			map.tiles[t.id+1][k] = p
 		end
 	end
-
+    MapRenderer.quads = map.tiles
+    MapRenderer.texture = map.texture
 end
 
 function MapRenderer:init(m)
@@ -58,7 +59,7 @@ function MapRenderer:draw(m)
 
 	local cameraX, cameraY = camera:position()
 
-	
+
 	if cameraX > wrapX then
 		camera:move(-wrapX, 0)
 	elseif cameraX < 0 then
@@ -105,7 +106,7 @@ function desenhaMapa( mmap, wrapX, wrapY)
 					love.graphics.draw(map.texture, map.tiles[idBordas[v]], x+60, y+70, ((i-1)/6) * math.pi*2, 1.05, 1.05, 60, 70)
 				end
 			end
-				
+
 			if hex.melhoria ~= 0 then
 				love.graphics.draw(map.texture, map.tiles[idMelhoria[hex.melhoria]], x, y)
 			end

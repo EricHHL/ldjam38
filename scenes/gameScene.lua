@@ -4,6 +4,7 @@ gameScene = Scene("gameScene")
 GameHexMap = Component("hexmap", {
 	map = HexMap(12,12)
 	})
+gui = require("/guis/gameSceneGui")
 
 --Scripts
 require("mapRenderer")
@@ -32,6 +33,9 @@ function gameScene:init()
 	map.hexmap.map.map[6][3].bordas[5] = 1
 
 	seletor = R.texture.seletor
+
+    -- GUI
+    gui.setup()
 end
 
 function gameScene:draw()
@@ -42,15 +46,22 @@ function gameScene:draw()
 	if r%2 == 0 then
 		x = x + 120/2	--Se por coluna par, tem que ter um offset de metade da largura
 	end
-	
+
 	love.graphics.draw(seletor, x-4, y-4)
+
+    gui:draw()
 end
 
 function gameScene:update(dt)
-	
+    gui:update(dt)
+end
+
+function love.mousereleased(x, y, button, isTouch)
+    gooi.released()
 end
 
 function love.mousepressed(x, y, button, istouch)
+    gooi.pressed()
     if button == 3 then
       	mousePressX = x
       	mousePressY = y
@@ -60,6 +71,14 @@ function love.mousepressed(x, y, button, istouch)
     	local q,r = PlayerInput.getSelected()
 		map.hexmap.map.map[q][r].melhoria = 1
     end
+end
+
+-- function love.keypressed(key, scancode, isrepeat)
+--     gooi.keypressed()
+-- end
+
+function love.textinput(text)
+    gooi.textimput()
 end
 
 return gameScene
