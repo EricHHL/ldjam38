@@ -1,16 +1,28 @@
 local gui = {}
 
 function gui:setup()
+    style = {
+        font = love.graphics.newFont("/fonts/Life is goofy.ttf", 16),
+		fgColor = "#ffffff",
+		bgColor = "#111111EE",
+		mode3d = true,
+		glass = false,
+		radius = 3,
+		innerRadius = 3
+	}
+	gooi.setStyle(style)
+	gooi.desktopMode()
+
     quads = MapRenderer.quads
     buttons = {}
     for i=1,2 do
         local tile = 15
         if i == 2 then tile = 13 end
         buttons[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140)
-        :setTooltip("This is a tooltip!")
         :onRelease(function()
             PlayerInput.setMelhoria(tile)
         end)
+        :setTooltip("Este é um Tile")
         :setIcon(MapRenderer.texture, quads[tile])--love.math.random(1, #MapRenderer.quads - 10)])
         :bg({100, 100, 100, 90})
     end

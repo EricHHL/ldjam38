@@ -50,7 +50,7 @@ function gameScene:update(dt)
 end
 
 function love.mousereleased(x, y, button, isTouch)
-    gooi.released()
+    print(gooi.released())
 end
 
 function love.mousepressed(x, y, button, istouch)
