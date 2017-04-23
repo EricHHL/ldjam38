@@ -87,20 +87,22 @@ function HexMap:poeCaminho(q,r,c)
 end
 
 function HexMap:poeMelhoria(q,r,m)
-	local hex = self:getHex(q,r)
-	if not hex then return end
+    local y = love.mouse.getY()
+    if y < controles.y then
+    	local hex = self:getHex(q,r)
+    	if not hex then return end
 
-	hex.melhoria = m
-	hex.pontos = m.pontos
-	for i=1,6 do
-		local vizinho = self:getVizinho(hex,i)
-		for k,v in pairs(m.combos) do
-			if v.m == vizinho.melhoria then
-				vizinho.pontos = vizinho.pontos + hex.pontos * v.p
-			end
-		end
-	end
-
+    	hex.melhoria = m
+    	hex.pontos = m.pontos
+    	for i=1,6 do
+    		local vizinho = self:getVizinho(hex,i)
+    		for k,v in pairs(m.combos) do
+    			if v.m == vizinho.melhoria then
+    				vizinho.pontos = vizinho.pontos + hex.pontos * v.p
+    			end
+    		end
+    	end
+    end
 end
 
 setmetatable(HexMap, {__call = function(_, ...) return new(...) end})
