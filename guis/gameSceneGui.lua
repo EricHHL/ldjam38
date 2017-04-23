@@ -32,14 +32,14 @@ function gui:setup()
             -- Define esse tile como selecionado
             selectedTile = tileOptions[i]
             if PlayerInput.discardMode then
-                -- Animação de card desaparecendo
-                Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile}) })
                 -- Se estiver no modo de descartar muda o quad a se desenhar
                 t = idTiles[love.math.random(2, #idTiles)] -- pega um tile aleatório
                 -- Muda o ícone do botão pro novo quad
                 tileOptions[i]:setIcon(MapRenderer.texture, quads[t.tile])
                 -- Muda a parada a desenhar
                 PlayerInput.setMelhoria(t)
+                -- Animação de card desaparecendo
+                Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile}) })
             else
                 PlayerInput.setMelhoria(t)
             end
@@ -96,6 +96,8 @@ function gui:setup()
             end
             print("Destroy mode")
             PlayerInput.discardMode = true
+            PlayerInput.setMelhoria(idTiles[1])
+            selectedTile = nil
         end),
     "3,1")
     -- Botão para entrar nas opções
@@ -150,7 +152,10 @@ function gui:draw()
     love.graphics.setColor(100, 100, 100, 255)
     love.graphics.rectangle("line", controles.x, controles.y, controles.w, controles.h)
     love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.rectangle("line", selectedTile.x, selectedTile.y, selectedTile.w, selectedTile.h)
+    if selectedTile then
+        love.graphics.rectangle("line", selectedTile.x, selectedTile.y, selectedTile.w, selectedTile.h)
+    end
+
 
     gooi.draw()
 
