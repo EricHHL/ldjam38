@@ -27,7 +27,7 @@ function gui:setup()
         if i == 1 then
             PlayerInput.setMelhoria(t)
         end
-        tileOptions[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140, 0.9, 0.9)
+        tileOptions[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140, 0.4921875, 0.4921875)
         :onRelease(function()
             -- Define esse tile como selecionado
             selectedTile = tileOptions[i]

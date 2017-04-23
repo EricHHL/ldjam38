@@ -7,14 +7,14 @@ melhorias = {
 		combos = {}
 	},
 	cidade = {
-		tile = 15,
+		tile = 2,
 		pontos = 100,
 		borda = 1,
 		maxBorda = 1,
 		combos = {}
 	},
 	floresta = {
-		tile = 13,
+		tile = 23,
 		pontos = 25,
 		borda = 0,
 		maxBorda = 2,
