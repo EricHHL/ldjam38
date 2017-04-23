@@ -63,7 +63,7 @@ function love.mousepressed(x, y, button, istouch)
     end
     if button == 1 then
     	local q,r = PlayerInput.getSelected()
-    	print(q, r)
+    	-- print(q, r)
     	local m = PlayerInput.getMelhoria()
 		if m == 3 then
 			map.hexmap.map:poeCaminho(q,r,1)

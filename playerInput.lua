@@ -44,5 +44,4 @@ end
 
 function PlayerInput.setMelhoria(m)
     melhoria = m
-    melhoria = m
 end

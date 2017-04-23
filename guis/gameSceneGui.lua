@@ -22,19 +22,20 @@ function gui:setup()
     -- Opções de tiles para se colocar no jogo
     local tileOptions = {}
     for i=1,6 do
-        local t = idTiles[love.math.random(1, #idTiles)]
+        local t = idTiles[love.math.random(2, #idTiles)]
         tileOptions[i] = gooi.newButton("", 50, love.graphics.getHeight() - 150, 120, 140, 0.9, 0.9)
         :onRelease(function()
             if PlayerInput.discardMode then
                 -- Se estiver no modo de descartar muda o quad a se desenhar
-                t = idTiles[love.math.random(1, #idTiles)] -- pega um aleatório
-                -- Muda o ícone do botão pro novo valor
+                t = idTiles[love.math.random(1, #idTiles)] -- pega um tile aleatório
+                -- Muda o ícone do botão pro novo quad
                 tileOptions[i]:setIcon(MapRenderer.texture, quads[t.tile])
                 -- Muda a parada a desenhar
                 PlayerInput.setMelhoria(t)
             else
                 PlayerInput.setMelhoria(t)
             end
+            print(t.tile, #idTiles)
         end)
         :setTooltip("Este é um Tile")
         :setIcon(MapRenderer.texture, quads[t.tile])--love.math.random(1, #MapRenderer.quads - 10)])
@@ -45,6 +46,7 @@ function gui:setup()
     -- Botão para selecionar um tile para colocar
     opcoes:add(gooi.newButton("Select")
         :onRelease(function(self)
+            -- Deixa esse da cor 'selected' e todos os outros da cor style.bgColor
             for k,v in pairs(opcoes.sons) do
                 if v.ref == self then
                     v.ref:bg(selected)
@@ -60,6 +62,7 @@ function gui:setup()
     -- Botão para descartar um tile a lista
     opcoes:add(gooi.newButton("Discard")
         :onRelease(function(self)
+            -- Deixa esse da cor 'selected' e todos os outros da cor style.bgColor
             for k,v in pairs(opcoes.sons) do
                 if v.ref == self then
                     v.ref:bg(selected)
@@ -74,6 +77,7 @@ function gui:setup()
     -- Botão para destruir um tile do jogo
     opcoes:add(gooi.newButton("Destroy")
         :onRelease(function(self)
+            -- Deixa esse da cor 'selected' e todos os outros da cor style.bgColor
             for k,v in pairs(opcoes.sons) do
                 if v.ref == self then
                     v.ref:bg(selected)
@@ -102,18 +106,20 @@ function gui:setup()
     end
 
     -- Amostra pontos do jogador
-    label = gooi.newLabel(string.format("%d", playerPoints), love.graphics.getWidth()/2, 10)
+    pontos = gooi.newLabel(string.format("%d", playerPoints), love.graphics.getWidth()/2, 10)
+    pontos.style.font = love.graphics.newFont("/fonts/Life is goofy.ttf", 40)
 
 
     -- TEST AREA
     opcoes.layout.debug = true
     -- Da pra facilmente mudar a fonte assim
-    label.style.font = love.graphics.newFont("/fonts/Life is goofy.ttf", 40)
     -- gooi.confirm("olar")
 end
 
 function gui:update(dt)
     gooi.update(dt)
+    pontos:setText(string.format("%d", playerPoints))
+    print(playerPoints)
     if love.keyboard.isDown('escape') then
         love.event.quit()
     end
@@ -122,6 +128,7 @@ end
 function gui:draw()
     camera:detach()
 
+    -- Desenha fundo da gui
     love.graphics.setColor(10, 10, 10, 200)
     love.graphics.rectangle("fill", controles.x, controles.y, controles.w, controles.h)
     love.graphics.setColor(255, 255, 255, 255)
