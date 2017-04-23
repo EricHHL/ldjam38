@@ -1,7 +1,4 @@
-
-
 AnimTexto = Component("animTexto", {texto = "", alpha = 255})
-
 
 TextoAnimator = Script({AnimTexto, Position})
 

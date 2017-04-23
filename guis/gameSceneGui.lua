@@ -41,7 +41,10 @@ function gui:setup()
             else
                 PlayerInput.setMelhoria(t)
             end
-            print(t.tile, #idTiles)
+            Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile}) })
+
+            -- Coisa("asd", {Position({x=x,y=y}), AnimTexto({texto = ""..(total-hex.pontos)})})
+
         end)
         :setTooltip("Este é um Tile")
         :setIcon(MapRenderer.texture, quads[t.tile])--love.math.random(1, #MapRenderer.quads - 10)])
@@ -135,7 +138,6 @@ end
 function gui:update(dt)
     gooi.update(dt)
     pontos:setText(string.format("%d", playerPoints))
-    print(playerPoints)
     if love.keyboard.isDown('escape') then
         love.event.quit()
     end
@@ -151,7 +153,6 @@ function gui:draw()
     love.graphics.rectangle("line", controles.x, controles.y, controles.w, controles.h)
     love.graphics.setColor(255, 255, 255, 255)
     love.graphics.rectangle("line", selectedTile.x, selectedTile.y, selectedTile.w, selectedTile.h)
-    -- love.graphics.setColor(255, 255, 255, 255)
 
     gooi.draw()
 

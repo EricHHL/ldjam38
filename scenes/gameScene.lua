@@ -12,6 +12,7 @@ gui = require("/guis/gameSceneGui")
 require("mapRenderer")
 require("playerInput")
 require("animaTexto")
+require("animaCards")
 
 local q = 0
 local r = 0
@@ -43,7 +44,6 @@ function gameScene:draw()
 
 	    love.graphics.draw(seletor, x-4, y-4)
     end
-
     gui:draw()
 end
 
