@@ -80,11 +80,19 @@ end
 function HexMap:poeCaminho(q,r,c)
 	local hex = self:getHex(q,r)
 	if not hex then return end
+	
+
 	for i=1,6 do
+		if hex.bordaCont >= hex.melhoria.maxBorda then break end
 		local vizinho = self:getVizinho(hex,i)
 		if vizinho and vizinho.borda == c then
-			hex.bordas[i] = c
-			vizinho.bordas[i+3%6] = c
+			if vizinho.bordaCont < vizinho.melhoria.maxBorda then
+
+				hex.bordaCont = hex.bordaCont+1
+				vizinho.bordaCont = vizinho.bordaCont + 1
+				hex.bordas[i] = c
+				vizinho.bordas[i+3%6] = c
+			end
 		end
 	end
 	hex.borda = c
@@ -94,7 +102,6 @@ function HexMap:poeCaminho(q,r,c)
 end
 
 function HexMap:poeMelhoria(q,r,m)
-
     local y = love.mouse.getY()
     -- Se não estiver dentro dos controles, pra não clicar atráves deles
     if y < controles.y then

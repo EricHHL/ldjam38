@@ -120,8 +120,15 @@ function desenhaMapa( mmap, wrapX, wrapY)
 
 			local pontos = hex.pontos--mmap:getPontos(hex, false)
 			if pontos ~= 0 then
-				love.graphics.print(pontos, x+50, y+100)
+				if pontos>0 then
+					love.graphics.setColor(Color.blue:value())
+					love.graphics.print(pontos, x+50, y+100)
+				else
+					love.graphics.setColor(Color.red:value())
+					love.graphics.print(-pontos, x+50, y+100)
+				end
 			end
+			love.graphics.setColor(Color.white:value())
 			--love.graphics.print(hex.rede, x+50, y+115)
 			--[[love.graphics.print(hex.pos.x..","..hex.pos.y, x+50, y+60)
 			if hex.sel then

@@ -28,9 +28,10 @@ local function new(pos, tipo)
 		2 = Rio
 	]]
 	h.borda = 0	
-
+	h.bordaCont = 0
 	--Para uso na renderização
 	h.bordas = {0,0,0,0,0,0}
+
 
 	h.pontos = 0
 
