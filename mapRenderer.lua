@@ -77,15 +77,17 @@ function MapRenderer:draw(m)
 
 	mmap:atualizaPontos()
 
+	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
 	desenhaMapa(mmap, 0, -wrapY) -- Cima
 	desenhaMapa(mmap, wrapX, -wrapY) -- Direita e Cima
-	desenhaMapa(mmap, -wrapX, -wrapY) -- Esquerda e cima
+
+	desenhaMapa(mmap, -wrapX, 0) -- Esquerda
 	desenhaMapa(mmap, 0, 0) -- Centro
 	desenhaMapa(mmap, wrapX, 0) -- Direita
-	desenhaMapa(mmap, -wrapX, 0) -- Esquerda
+	
 	desenhaMapa(mmap, -wrapX, wrapY) -- Esquerda e baixo
-	desenhaMapa(mmap, wrapX, wrapY) -- Direita e Baixo
 	desenhaMapa(mmap, 0, wrapY) -- Baixo
+	desenhaMapa(mmap, wrapX, wrapY) -- Direita e Baixo
 
 
 end
