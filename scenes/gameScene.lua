@@ -8,6 +8,9 @@ GameHexMap = Component("hexmap", {
 gui = require("/guis/gameSceneGui")
 
 
+--guiMenu = require("/guis/gameSceneGuiMenu")
+
+
 --Scripts
 require("mapRenderer")
 require("playerInput")
@@ -28,6 +31,7 @@ function gameScene:init()
 
     -- GUI
     gui.setup()
+    --guiMenu.setup()
 end
 
 function gameScene:draw()
@@ -45,10 +49,12 @@ function gameScene:draw()
 	    love.graphics.draw(seletor, x-4, y-4)
     end
     gui:draw()
+    --guiMenu:draw()
 end
 
 function gameScene:update(dt)
     gui:update(dt)
+    --guiMenu:update(dt)
 end
 
 function love.mousereleased(x, y, button, isTouch)
