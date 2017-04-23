@@ -1,12 +1,12 @@
 gameScene = Scene("gameScene")
 
+require("dados")
 --Componentes
 GameHexMap = Component("hexmap", {
 	map = HexMap(12,12)
 	})
 gui = require("/guis/gameSceneGui")
 
-require("dados")
 
 --Scripts
 require("mapRenderer")
@@ -21,9 +21,6 @@ function gameScene:init()
 	map.hexmap.map.map[2][2].tipo = 2
 	map.hexmap.map.map[3][2].tipo = 2
 	map.hexmap.map.map[3][3].tipo = 2
-	-- map.hexmap.map.map[4][2].melhoria = 1
-	-- map.hexmap.map.map[4][3].melhoria = 2
-	-- map.hexmap.map.map[4][1].melhoria = 2
 
 	seletor = R.texture.seletor
 

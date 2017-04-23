@@ -107,14 +107,16 @@ function desenhaMapa( mmap, wrapX, wrapY)
 				end
 			end
 
-			if hex.melhoria ~= 0 then
+			if hex.melhoria ~= melhorias.vazio then
 				love.graphics.draw(map.texture, map.tiles[hex.melhoria.tile], x, y)
 			end
 
-			if hex.pontos > 0 then
-				love.graphics.print(hex.pontos, x+50, y+100)
+			local pontos = mmap:getPontos(hex, false)
+			if pontos > 0 then
+				love.graphics.print(pontos, x+50, y+100)
 			end
 
+			--love.graphics.print(hex.rede, x+50, y+115)
 			--[[love.graphics.print(hex.pos.x..","..hex.pos.y, x+50, y+60)
 			if hex.sel then
 				love.graphics.print(hex.sel, x+50, y+75)

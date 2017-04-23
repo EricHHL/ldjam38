@@ -20,6 +20,10 @@ local vizinhosP = {
 	vector(1,1)
 }
 
+local proxRede = 1
+redes = {}
+pontosRedes = {}
+
 local function new(w,h)
 	local hm = {}
 	setmetatable(hm, HexMap)
@@ -84,26 +88,93 @@ function HexMap:poeCaminho(q,r,c)
 		end
 	end
 	hex.borda = c
+	if c ~= 0 then
+		self:atualizaCaminho(q,r,c)
+	end
 end
 
 function HexMap:poeMelhoria(q,r,m)
+
     local y = love.mouse.getY()
     -- Se não estiver dentro dos controles, pra não clicar atráves deles
     if y < controles.y then
-    	local hex = self:getHex(q,r)
-    	if not hex then return end
+		local hex = self:getHex(q,r)
+		if not hex then return end
 
-    	hex.melhoria = m
-    	hex.pontos = m.pontos
-    	for i=1,6 do
-    		local vizinho = self:getVizinho(hex,i)
-    		for k,v in pairs(m.combos) do
-    			if v.m == vizinho.melhoria then
-    				vizinho.pontos = vizinho.pontos + hex.pontos * v.p
-    			end
-    		end
-    	end
-    end
+		hex.melhoria = m
+		hex.pontos = m.pontos
+		self:poeCaminho(q,r,m.borda)
+		for i=1,6 do
+			local vizinho = self:getVizinho(hex,i)
+			if vizinho.rede ~= 0 then
+				self:atualizaCaminho(vizinho.pos.x,vizinho.pos.y,vizinho.borda)
+			end
+		end
+	end
+end
+
+function HexMap:getPontos(hex, excRede)
+	
+	local base = hex.melhoria.pontos
+	local total = base
+
+	for i=1,6 do
+		local vizinho = self:getVizinho(hex,i)
+		for k,v in pairs(hex.melhoria.combos) do
+			if v.m == vizinho.melhoria then
+				total = total + (base * v.p)
+			end
+		end
+	end
+
+	if not excRede  and hex.rede~=0 then
+		total = total + pontosRedes[hex.rede]
+	end
+
+	return total
+end
+
+function HexMap:atualizaCaminho(q, r, c)
+	local hex = self:getHex(q,r)
+	if not hex then return end
+
+	--Atualiza rede
+	if (hex.rede == 0) then
+		for i=1,6 do
+			local vizinho = self:getVizinho(hex,i)
+			if vizinho.bordas[i+3%6] == c then
+				if hex.rede == 0 then
+					hex.rede = vizinho.rede
+					table.insert(redes[hex.rede], hex)
+				else
+					if hex.rede ~= vizinho.rede then
+						local antRede = vizinho.rede
+						for k,v in pairs(redes[vizinho.rede]) do
+							v.rede = hex.rede
+							table.insert(redes[hex.rede], v)
+						end
+						redes[antRede] = nil
+					end
+				end				
+			end
+		end
+	end
+	if hex.rede == 0 then
+		hex.rede = proxRede
+		redes[hex.rede] = {hex}
+		pontosRedes[hex.rede] = 0
+		proxRede = proxRede + 1
+	end
+
+	--Atualiza pontos da rede
+	local pontos = 0
+	for k,v in pairs(redes[hex.rede]) do
+		if v.melhoria == melhorias.cidade then
+			pontos = pontos + self:getPontos(v, true)*0.20	--A cidade contribui com 20% dos pontos para a rede de ruas
+		end		
+	end
+
+	pontosRedes[hex.rede] = math.floor(pontos)
 end
 
 setmetatable(HexMap, {__call = function(_, ...) return new(...) end})
