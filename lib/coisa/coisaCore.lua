@@ -104,6 +104,8 @@ function cCore.draw()
 	if cCore.currentScene then
 		cCore.currentScene:_draw()
 	end
+	cCore.callScripts("_drawAfter")
+
 end
 
 function cCore.mousepressed(x,y,b)
