@@ -21,9 +21,6 @@ function gameScene:init()
 	map.hexmap.map.map[2][2].tipo = 2
 	map.hexmap.map.map[3][2].tipo = 2
 	map.hexmap.map.map[3][3].tipo = 2
-	map.hexmap.map.map[4][2].melhoria = 1
-	map.hexmap.map.map[4][3].melhoria = 2
-	map.hexmap.map.map[4][1].melhoria = 2
 
 	seletor = R.texture.seletor
 
@@ -77,7 +74,11 @@ end
 -- end
 
 function love.textinput(text)
+<<<<<<< HEAD
     gooi.textinput(text)
+=======
+    gooi.textinput()
+>>>>>>> 06463bba58fb6332015a05aaa526a5ec80e3d985
 end
 
 return gameScene
