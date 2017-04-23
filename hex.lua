@@ -20,7 +20,7 @@ local function new(pos, tipo)
 		1 = Cidade
 		2 = Floresta
 	]]
-	h.melhoria = 0
+	h.melhoria = melhorias.vazio
 
 	--[[ Borda
 		0 = Vazio
@@ -33,6 +33,8 @@ local function new(pos, tipo)
 	h.bordas = {0,0,0,0,0,0}
 
 	h.pontos = 0
+
+	h.rede = 0
 
 	return h
 end

@@ -31,6 +31,9 @@ function love.keypressed(k)
 	if k == "2" then
 		melhoria = melhorias.floresta
 	end
+	if k == "3" then
+		melhoria = melhorias.rua
+	end
 
 end
 
