@@ -10,7 +10,9 @@ function CardsAnimator:init(t)
 end
 
 function CardsAnimator:drawAfter(t)
+    camera:detach()
     love.graphics.setColor(255, 255, 255, t.pos.fade)
 	love.graphics.draw(MapRenderer.texture, MapRenderer.quads[t.animaCards.tile], t.pos.x, t.pos.y, 0, t.animaCards.scale.sx, t.animaCards.scale.sy, 0, 0)
     love.graphics.setColor(255, 255, 255, 255)
+    camera:attach()
 end
