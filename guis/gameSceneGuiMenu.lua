@@ -1,46 +1,36 @@
-require("dados")
 
 local gui = {}
 
 function gui:setup()
     -- Define estilo da Gui
-    selectedColor = {15, 256, 12}
+    love.graphics.setBackgroundColor(150, 150, 150)
     style = {
-        font = love.graphics.newFont("/fonts/Life is goofy.ttf", 32),
-        fgColor = "#ffffff",
-        bgColor = {6, 133, 245, 200},
+        font = love.graphics.newFont("/fonts/Berry Rotunda.ttf", 40),
+        fgColor = "#000000",
+        bgColor = {6, 133, 245, 255},
         mode3d = true,
         glass = true,
-        radius = 3,
+        radius = 13,
         innerRadius = 3
     }
     gooi.setStyle(style)
     gooi.desktopMode()
 
-    opcoesMenu = gooi.newPanel(width/2 - 150, height/2 - 200, 300, 300, "grid 3x1")
+    opcoesMenu = gooi.newPanel(20, height - 170, 250, 150, "grid 2x1")
     --Inicia o jogo
-    opcoesMenu:add(gooi.newButton("Play")
+    --text, x, y, w, h, scalex, scaley, q
+    opcoesMenu:add(gooi.newButton({text = "Play", align = "center"}):bg({215, 143, 0, 220})
     :onRelease(function(self)
         gooi.removeComponent(opcoesMenu)
         cCore.loadScene(R.scene.gameScene)
-    end),
-    "1,1")
-    --Entra nas opções
-    opcoesMenu:add(gooi.newButton("Options")
-    :onRelease(function()
-        gooi.confirm("There are none, huehuehue.", function()
-            --Alguma opção
-        end)
-    end),
-    "2,1")
+    end), "1,1")
+
+
     --Sai do jogo
-    opcoesMenu:add(gooi.newButton("Exit")
+    opcoesMenu:add(gooi.newButton({text = "Exit", align = "center"}):bg({215, 143, 0, 200})
     :onRelease(function()
-        gooi.confirm("Are you sure?", function()
-            love.event.quit()
-        end)
-    end),
-    "3,1")
+        cCore.loadScene(R.scene.OptionScene)
+    end), "2,1")
 
 end
 
@@ -55,12 +45,11 @@ end
 function gui:draw()
     camera:detach()
 
-    -- Desenha fundo da gui
-    love.graphics.setColor(200, 200, 200, 170)
-    love.graphics.rectangle("fill",  width/2 - 150, height/2 - 200, 300, 300)
+    love.graphics.setBackgroundColor(150, 150, 150)
+    love.graphics.setColor(10, 10, 10, 200)
+    love.graphics.rectangle("fill", 19, height - 171, 251, 151)
 
-    love.graphics.setColor(80, 80, 80, 255)
-    love.graphics.rectangle("line",  width/2 - 150, height/2 - 200, 300, 300)
+
     gooi.draw()
 
     camera:attach()
