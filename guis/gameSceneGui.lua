@@ -39,7 +39,7 @@ function gui:setup()
                 -- Muda a parada a desenhar
                 PlayerInput.setMelhoria(t)
                 -- Animação de card desaparecendo
-                Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile}) })
+                Coisa("bah", {Position({x=tileOptions[i].x,y=tileOptions[i].y}), AnimaCards({tile = t.tile, scale = tileOptions[i].scale }) })
             elseif PlayerInput.mode == "select" then
                 PlayerInput.setMelhoria(t)
             end

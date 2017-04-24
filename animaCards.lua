@@ -1,4 +1,4 @@
-AnimaCards = Component("animaCards", {tile = 1})
+AnimaCards = Component("animaCards", {tile = 1, scale = {} })
 
 CardsAnimator = Script({AnimaCards, Position})
 
@@ -11,6 +11,6 @@ end
 
 function CardsAnimator:drawAfter(t)
     love.graphics.setColor(255, 255, 255, t.pos.fade)
-	love.graphics.draw(MapRenderer.texture, MapRenderer.quads[t.animaCards.tile], t.pos.x, t.pos.y, 0, 1, 1, 0, 0)
+	love.graphics.draw(MapRenderer.texture, MapRenderer.quads[t.animaCards.tile], t.pos.x, t.pos.y, 0, t.animaCards.scale.sx, t.animaCards.scale.sy, 0, 0)
     love.graphics.setColor(255, 255, 255, 255)
 end
