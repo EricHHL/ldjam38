@@ -1,6 +1,4 @@
 require("lib.coisa.coisaCore")
--- PUSH
-local push = require("lib.push")
 -- GOOI
 require("lib.gooi.gooi")
 gooiComponent = require("lib.gooi.component")
@@ -21,13 +19,6 @@ function love.load()
     cCore.loadScene(R.scene.gameScene)
     camera = Camera(width/2, height/2)
 
-    -- PUSH configurações
-    gameWidth, gameHeight = 1366, 768 --fixed game resolution
-    local windowWidth, windowHeight = love.window.getDesktopDimensions()
-    windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
-
-    push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false})
-
 end
 
 function love.update(dt)
@@ -36,17 +27,10 @@ function love.update(dt)
 end
 
 function love.draw()
-    push:start()
-
     camera:attach()
     cCore.draw()
     camera:detach()
     -- gooi.draw()
-
-    -- love.graphics.setLineWidth(10)
-    -- love.graphics.rectangle("line", 0, 0, gameWidth, gameHeight)
-
-    push:finish()
 end
 
 
