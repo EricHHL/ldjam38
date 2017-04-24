@@ -11,8 +11,11 @@ end
 
 function CardsAnimator:drawAfter(t)
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     camera:detach()
+=======
+>>>>>>> parent of 9553c31... corrigido probleminha na animação de renovação
 =======
 >>>>>>> parent of 9553c31... corrigido probleminha na animação de renovação
     love.graphics.setColor(255, 255, 255, t.pos.fade)
