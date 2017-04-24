@@ -110,11 +110,11 @@ function HexMap:renovaCard()
 
     -- Muda o ícone do botão pro novo quad
     selectedTile:setIcon(MapRenderer.texture, MapRenderer.quads[t.tile])
+
     -- Muda a parada a desenhar
     PlayerInput.setMelhoria(t)
     -- Animação de card desaparecendo
     Coisa("bah", {Position({x=selectedTile.x,y=selectedTile.y}), AnimaCards({tile = t.tile, scale = selectedTile.scale }) })
-    -- Fica selecionado nada
 end
 
 function HexMap:poeMelhoria(q,r,m)
