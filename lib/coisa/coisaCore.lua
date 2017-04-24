@@ -104,7 +104,7 @@ function cCore.draw()
 	if cCore.currentScene then
 		cCore.currentScene:_draw()
 	end
-	cCore.callScripts("_drawAfter")
+	-- cCore.callScripts("_drawAfter")
 
 end
 
@@ -129,7 +129,7 @@ end
 function clone(c)
 	if type(c) ~= "table" then return c end
 	local n = {}
-	for k,v in pairs(c) do 
+	for k,v in pairs(c) do
 		n[k] = clone(v)
 	end
 	return setmetatable(n, getmetatable(c))

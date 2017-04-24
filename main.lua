@@ -18,6 +18,7 @@ function love.load()
     -- cCore.loadScene(R.scene.menuScene)
     cCore.loadScene(R.scene.gameScene)
     camera = Camera(width/2, height/2)
+
 end
 
 function love.update(dt)
