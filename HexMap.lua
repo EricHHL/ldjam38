@@ -80,8 +80,11 @@ end
 function HexMap:poeCaminho(q,r,c)
 	local hex = self:getHex(q,r)
 	if not hex then return end
-	
 
+    -- Renova o card de caminho
+    self:renovaCard()
+
+    -- Coloca o caminho
 	for i=1,6 do
 		if hex.bordaCont >= hex.melhoria.maxBorda then break end
 		local vizinho = self:getVizinho(hex,i)
@@ -101,10 +104,27 @@ function HexMap:poeCaminho(q,r,c)
 	end
 end
 
+function HexMap:renovaCard()
+    -- Quad a se mudar
+    local t = idTiles[love.math.random(2, #idTiles)] -- pega um tile aleatório
+
+    -- Muda o ícone do botão pro novo quad
+    selectedTile:setIcon(MapRenderer.texture, MapRenderer.quads[t.tile])
+
+    -- Muda a parada a desenhar
+    PlayerInput.setMelhoria(t)
+    -- Animação de card desaparecendo
+    Coisa("bah", {Position({x=selectedTile.x,y=selectedTile.y}), AnimaCards({tile = t.tile, scale = selectedTile.scale }) })
+end
+
 function HexMap:poeMelhoria(q,r,m)
+
     local y = love.mouse.getY()
     -- Se não estiver dentro dos controles, pra não clicar atráves deles
     if y < controles.y then
+        -- Renova o card usado
+        self:renovaCard()
+        -- Coloca a melhoria
 		local hex = self:getHex(q,r)
 		if not hex then return end
 
@@ -122,7 +142,7 @@ function HexMap:poeMelhoria(q,r,m)
 end
 
 function HexMap:getPontos(hex, excRede)
-	
+
 	local base = hex.melhoria.pontos
 	local total = base
 
@@ -184,7 +204,7 @@ function HexMap:atualizaCaminho(q, r, c)
 						end
 						redes[antRede] = nil
 					end
-				end				
+				end
 			end
 		end
 	end
@@ -200,7 +220,7 @@ function HexMap:atualizaCaminho(q, r, c)
 	for k,v in pairs(redes[hex.rede]) do
 		if v.melhoria == melhorias.cidade then
 			pontos = pontos + self:getPontos(v, true)*0.20	--A cidade contribui com 20% dos pontos para a rede de ruas
-		end		
+		end
 	end
 
 	pontosRedes[hex.rede] = math.floor(pontos)

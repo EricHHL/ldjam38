@@ -20,7 +20,7 @@ function gui:setup()
     -- Pega os quads globais para desenhar nos botões
     local quads = MapRenderer.quads
     -- Opções de tiles para se colocar no jogo
-    local tileOptions = {}
+    tileOptions = {}
     for i=1,6 do
         local t = idTiles[love.math.random(2, #idTiles)]
         -- GAMBIARRA ALERT para deixar selecionado o primeiro tile sempre
@@ -51,7 +51,7 @@ function gui:setup()
     -- Guarda o tile selecionado no painel e seleciona o primeiro
     selectedTile = tileOptions[1]
     -- Opções, cria um painel em grade 3x3 pra elas
-    opcoes = gooi.newPanel(love.graphics.getWidth() - 420, love.graphics.getHeight() - 154, 400, 140, "grid 3x3")
+    opcoes = gooi.newPanel(love.graphics.getWidth() - 420, love.graphics.getHeight() - 154, 400, 140, "grid 2x2")
     -- Botão para selecionar um tile para colocar
     opcoes:add(gooi.newButton("Select")
         :onRelease(function(self)
@@ -84,22 +84,23 @@ function gui:setup()
         end),
     "2,1")
     -- Botão para destruir um tile do jogo
-    opcoes:add(gooi.newButton("Destroy")
-        :onRelease(function(self)
-            -- Deixa esse da cor 'selectedColor' e todos os outros da cor style.bgColor
-            for k,v in pairs(opcoes.sons) do
-                if v.ref == self then
-                    v.ref:bg(selectedColor)
-                else
-                    v.ref:bg(style.bgColor)
-                end
-            end
-            print("Destroy mode")
-            PlayerInput.mode = "destroy"
-            PlayerInput.setMelhoria(idTiles[1])
-            selectedTile = nil
-        end),
-    "3,1")
+    -- opcoes:add(gooi.newButton("Destroy")
+    --     :onRelease(function(self)
+    --         -- Deixa esse da cor 'selectedColor' e todos os outros da cor style.bgColor
+    --         for k,v in pairs(opcoes.sons) do
+    --             if v.ref == self then
+    --                 v.ref:bg(selectedColor)
+    --             else
+    --                 v.ref:bg(style.bgColor)
+    --             end
+    --         end
+    --         print("Destroy mode")
+    --         PlayerInput.mode = "destroy"
+    --         PlayerInput.setMelhoria(idTiles[1])
+    --         selectedTile = nil
+    --     end),
+    -- "3,1")
+
     -- Botão para entrar nas opções
     opcoes:add(gooi.newButton("Options")
     :onRelease(function()
@@ -107,7 +108,7 @@ function gui:setup()
 
         end)
     end),
-    "2,3")
+    "1,2")
     -- Botão para sair do jogo
     opcoes:add(gooi.newButton("Exit")
     :onRelease(function()
@@ -115,7 +116,7 @@ function gui:setup()
             love.event.quit()
         end)
     end),
-    "3,3")
+    "2,2")
 
 
     -- Cria painel controles pra por os controles
